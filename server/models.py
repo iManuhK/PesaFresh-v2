@@ -21,6 +21,9 @@ class User(db.Model, SerializerMixin):
     password = db.Column(db.String(128), nullable=False)
     role = db.Column(db.String(30), nullable=True, default="user")
     active = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    phone=db.Column(db.String, default="", nullable=False)
 
     # Relationships
     credits = db.relationship('Credit', back_populates='user')
