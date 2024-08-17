@@ -1,46 +1,51 @@
 #!/usr/bin/env python3
 
-# Standard library imports
-from flask import Flask, request, make_response, jsonify
-from flask_restful import Resource, Api
+from flask import Flask, request, make_response, jsonify,send_from_directory
 from flask_migrate import Migrate
+from flask_restful import Api, Resource
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required, get_jwt
-from datetime import timedelta
-import random, os
-
-# Add your model imports
+from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User, Pricing, Product, Production, Credit, Transaction, Industry
+import os, uuid, logging, random
+from datetime import timedelta
 from dotenv import load_dotenv
 load_dotenv()
 
-# Instantiate app, set attributes
 app = Flask(__name__)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
+CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
+UPLOAD_FOLDER = 'images/'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-app.config["JWT_SECRET_KEY"] = "dcvbgftyukns6qad"+str(random.randint(1,10000000000))
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DATABASE = os.environ.get("DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'PesaFresh.db')}")
+
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY", "your_secret_key")
 app.config["SECRET_KEY"] = "s6hjx0an2mzoret"+str(random.randint(1,1000000000))
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 app.config['ACCESS_TOKEN_EXPIRES'] = False
-
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 migrate = Migrate(app, db)
 db.init_app(app)
-
-# Instantiate REST API
 api = Api(app)
-
-# Instantiate CORS
-CORS(app)
-
-bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
+bcrypt = Bcrypt(app)
+
+# Setup logging
+logging.basicConfig(filename=os.path.join(BASE_DIR, 'logs/PesaFresh.log'),
+                    level=logging.INFO,
+                    format='%(asctime)s %(levelname)s: %(message)s')
+
+# Function to check allowed file extensions
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 class Home(Resource):
     def get(self):

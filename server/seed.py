@@ -75,7 +75,7 @@ def seed_pricing(n, products, industries):
     pricing_list = []
     for _ in range(n):
         pricing = Pricing(
-            Unit_of_Measure=faker.random_element(elements=('kg', 'liter', 'piece')),
+            Unit_of_Measure=faker.random_element(elements=('kg', 'ltr', 'piece')),
             Unit_Price=faker.random_number(digits=2),
             product_id=faker.random_element(products).id,
             industry_id=faker.random_element(industries).id,
