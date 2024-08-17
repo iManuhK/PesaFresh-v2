@@ -121,6 +121,7 @@ def seed_transactions(n, users):
         transaction = Transaction(
             transaction_date=faker.date_time_this_year(),
             transaction_type=faker.random_element(elements=('debit', 'credit')),
+            description = faker.text(max_nb_chars=70),
             currency=faker.currency_code(),
             amount=faker.random_number(digits=3),
             user_id=faker.random_element(users).id

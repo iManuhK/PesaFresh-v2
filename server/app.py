@@ -47,6 +47,15 @@ logging.basicConfig(filename=os.path.join(BASE_DIR, 'logs/PesaFresh.log'),
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route('/images/<filename>')
+def get_image(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    logging.error(f"Error: {str(e)}", exc_info=True)
+    return jsonify({"error": "An unexpected error occurred"}), 500
+
 class Home(Resource):
     def get(self):
         response_body = {
@@ -148,7 +157,6 @@ class Users(Resource):
 
 api.add_resource(Users, '/users')
 
-
 class UsersByID(Resource):
     def get(self,id):
          user = User.query.filter_by(id=id).first()
@@ -206,78 +214,67 @@ class UsersByID(Resource):
             return make_response(response_body, 404)
          
 api.add_resource(UsersByID, '/users/<int:id>')
-class Packages(Resource):
+
+class Products(Resource):
     def get(self):
-        packages = [package.to_dict() for package in Package.query.all()]
-        return make_response(jsonify(packages), 200)
+        products = [product.to_dict() for product in Product.query.all()]
+        return make_response(jsonify(products), 200)
+    
     def post(self):
         try:
             data = request.json
-            new_package = Package(
-                package_name = data['package_name'],
-                rate = data['rate'],
-                amount = data['amount'],
+            new_product = Product(
+                name=data['name'],
+                description=data['description'],
+                price=data['price'],
+                quantity=data['quantity'],
+                image=data.get('image', '')
             )
 
-            db.session.add(new_package)
+            db.session.add(new_product)
             db.session.commit()
 
-            package_dict = new_package.to_dict()
-            response_body = {'success': 'Package created successfully', 'package': package_dict}
+            product_dict = new_product.to_dict()
+            response_body = {'success': 'Product created successfully', 'product': product_dict}
             return make_response(jsonify(response_body), 201)
         
         except KeyError:
-            response_body = {'error': 'Could not create package. Required fields missing.'}
+            response_body = {'error': 'Could not create product. Required fields missing.'}
             return make_response(jsonify(response_body), 400)
         
         except Exception as e:
             response_body = {'error': str(e)}
-            return make_response(response_body, 500)
-api.add_resource(Packages, '/loans')
+            return make_response(jsonify(response_body), 400)
 
-class PackagesByID(Resource):
-    def get(self,id):
-         package = Package.query.filter_by(id=id).first()
-         if package:
-            package_dict = package.to_dict()
+api.add_resource(Products, '/products')
+
+class ProductsByID(Resource):
+    def get(self, id):
+         product = Product.query.filter_by(id=id).first()
+         if product:
+            product_dict = product.to_dict()
             
-            return make_response(package_dict, 200)
+            return make_response(product_dict, 200)
          
          else:
             response_body = {
-                'message' : 'Package unavailable! Check the id again.'
-            }
-
-            return make_response(response_body, 404)
-    def delete(self, id):
-        package = Package.query.filter_by(id=id).first()
-        if package:
-            db.session.delete(package)
-            db.session.commit()
-
-            response_body = {
-                'message': 'Package deleted Successfully'
-            }
-            return make_response(response_body, 200)
-        else:
-            response_body = {
-                'message' : 'Package Not Available! Check the id again.'
+                'message' : 'Product does not exist! Check the id again.'
             }
 
             return make_response(response_body, 404)
         
-    def patch(self,id):
-         package = Package.query.filter_by(id=id).first()
-         if package:
+    def patch(self, id):
+         product = Product.query.filter_by(id=id).first()
+         if product:
             try:
                 for attr in request.json:
-                    setattr(package, attr, request.json.get(attr))
+                    setattr(product, attr, request.json.get(attr))
 
-                db.session.add(package)
+                db.session.add(product)
                 db.session.commit()
 
-                package_dict = package.to_dict()
-                return make_response(package_dict, 200)
+                product_dict = product.to_dict()
+                return make_response(product_dict, 200)
             
             except ValueError:
                 response_body = {
@@ -285,12 +282,244 @@ class PackagesByID(Resource):
                 }
          else:
             response_body = {
-                'message' : 'Package you are trying to Edit does not exist! Check the id again.'
+                'message' : 'Product you are trying to Edit does not exist! Check the id again.'
             }
 
             return make_response(response_body, 404)
          
-api.add_resource(PackagesByID, '/loans/<int:id>')
+    def delete(self, id):
+        product = Product.query.filter_by(id=id).first()
+        if product:
+            db.session.delete(product)
+            db.session.commit()
+
+            response_body = {
+                'message': 'Product deleted Successfully'
+            }
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                'message' : 'Product does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+
+api.add_resource(ProductsByID, '/products/<int:id>')
+
+class Transactions(Resource):
+    def get(self):
+        transactions = [transaction.to_dict() for transaction in Transaction.query.all()]
+        return make_response(jsonify(transactions), 200)
+    
+    def post(self):
+        try:
+            data = request.json
+            new_transaction = Transaction(
+                user_id=data['user_id'],
+                product_id=data['product_id'],
+                quantity=data['quantity'],
+                price=data['price'],
+                status=data['status']
+            )
+
+            db.session.add(new_transaction)
+            db.session.commit()
+
+            transaction_dict = new_transaction.to_dict()
+            response_body = {'success': 'Transaction created successfully', 'transaction': transaction_dict}
+            return make_response(jsonify(response_body), 201)
+        
+        except KeyError:
+            response_body = {'error': 'Could not create transaction. Required fields missing.'}
+            return make_response(jsonify(response_body), 400)
+        
+        except Exception as e:
+            response_body = {'error': str(e)}
+            return make_response(jsonify(response_body), 400)
+        
+
+api.add_resource(Transactions, '/transactions')
+
+class TransactionsByID(Resource):
+    def get(self, id):
+         transaction = Transaction.query.filter_by(id=id).first()
+         if transaction:
+            transaction_dict = transaction.to_dict()
+            
+            return make_response(transaction_dict, 200)
+         
+         else:
+            response_body = {
+                'message' : 'Transaction does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+         
+    def patch(self, id):
+         transaction = Transaction.query.filter_by(id=id).first()
+         if transaction:
+            try:
+                for attr in request.json:
+                    setattr(transaction, attr, request.json.get(attr))
+
+                db.session.add(transaction)
+                db.session.commit()
+
+                transaction_dict = transaction.to_dict()
+                return make_response(transaction_dict, 200)
+            
+            except ValueError:
+                response_body = {
+                    'error': 'error occured'
+                }
+         else:
+            response_body = {
+                'message' : 'Transaction you are trying to Edit does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+         
+    def delete(self, id):
+        transaction = Transaction.query.filter_by(id=id).first()
+        if transaction:
+            db.session.delete(transaction)
+            db.session.commit()
+
+            response_body = {
+                'message': 'Transaction deleted Successfully'
+            }
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                'message' : 'Transaction does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+
+api.add_resource(TransactionsByID, '/transactions/<int:id>')
+
+class Productions(Resource):
+    def get(self):
+        productions = [production.to_dict() for production in Production.query.all()]
+        return make_response(jsonify(productions), 200)
+    
+    def post(self):
+        try:
+            data = request.json
+            new_production = Production(
+                product_id=data['product_id'],
+                quantity=data['quantity'],
+                date=data['date']
+            )
+
+            db.session.add(new_production)
+            db.session.commit()
+
+            production_dict = new_production.to_dict()
+            response_body = {'success': 'Production created successfully', 'production': production_dict}
+            return make_response(jsonify(response_body), 201)
+        
+        except KeyError:
+            response_body = {'error': 'Could not create production. Required fields missing.'}
+            return make_response(jsonify(response_body), 400)
+        
+        except Exception as e:
+            response_body = {'error': str(e)}
+            return make_response(jsonify(response_body), 400)
+        
+api.add_resource(Productions, '/productions')
+
+class ProductionsByID(Resource):
+    def get(self, id):
+         production = Production.query.filter_by(id=id).first()
+         if production:
+            production_dict = production.to_dict()
+            
+            return make_response(production_dict, 200)
+         
+         else:
+            response_body = {
+                'message' : 'Production does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+    
+    def patch(self, id):
+        production = Production.query.filter_by(id=id).first()
+        if production:
+            try:
+                for attr in request.json:
+                    setattr(production, attr, request.json.get(attr))
+
+                db.session.add(production)
+                db.session.commit()
+
+                production_dict = production.to_dict()
+                return make_response(production_dict, 200)
+            
+            except ValueError:
+                response_body = {
+                    'error': 'error occured'
+                }
+                return make_response(jsonify(response_body), 400)
+            except Exception as e:
+                response_body = {'error': str(e)}
+                return make_response(jsonify(response_body), 400)
+         
+    def delete(self, id):
+        production = Production.query.filter_by(id=id).first()
+        if production:
+            db.session.delete(production)
+            db.session.commit()
+
+            response_body = {
+                'message': 'Production deleted Successfully'
+            }
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                'message' : 'Production does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+
+api.add_resource(ProductionsByID, '/productions/<int:id>')
+
+class myTransactions(Resource):
+    @jwt_required
+    def get(self):
+        current_user = get_jwt_identity()
+        if current_user != id:
+            logging.warning(f"User {current_user} attempted to access transactions {id} without permission.")
+            return make_response(jsonify({"message": "Forbidden"}), 403)
+        
+        transactions = [transaction.to_dict() for transaction in Transaction.query.filter_by(user_id=id).all()]
+        if transactions:
+            logging.info(f"User {current_user} accessed all their transactions.")
+            return make_response(jsonify(transactions), 200)
+        else:
+            logging.warning(f"User {current_user} tried to access transactions {id} that do not exist.")
+            return make_response(jsonify({"message": "Transaction not found"}), 404)
+
+api.add_resource(myTransactions, '/my-transactions/user/<int:id>')
+
+class myProductions(Resource):
+    @jwt_required
+    def get(self):
+        current_user = get_jwt_identity()
+        if current_user!= id:
+            logging.warning(f"User {current_user} attempted to access productions {id} without permission.")
+            return make_response(jsonify({"message": "Forbidden"}), 403)
+        
+        productions = [production.to_dict() for production in Production.query.filter_by(product_id=id).all()]
+        if productions:
+            logging.info(f"User {current_user} accessed all their productions.")
+            return make_response(jsonify(productions), 200)
+        else:
+            logging.warning(f"User {current_user} tried to access productions {id} that do not exist.")
+            return make_response(jsonify({"message": "Product not found"}), 404)
+
+api.add_resource(myProductions, '/my-productions/user/<int:id>')
 
 
 if __name__ == '__main__':

@@ -25,14 +25,13 @@ class User(db.Model, SerializerMixin):
     updated_on = db.Column(db.DateTime, default=None, onupdate=db.func.now(), nullable=True)
 
     # Relationships
-    credits = db.relationship('Credit', back_populates='user')
-    # produce = db.relationship('Product', backref='user', cascade="all, delete-orphan")
-    transactions = db.relationship('Transaction', back_populates='user', cascade="all, delete-orphan")
-    production = db.relationship('Production', back_populates='user')
-    industry = db.relationship('Industry', back_populates='user')
+    credits = db.relationship('Credit', back_populates='user', cascade='all, delete-orphan')
+    transactions = db.relationship('Transaction', back_populates='user', cascade='all, delete-orphan')
+    production = db.relationship('Production', back_populates='user', cascade='all, delete-orphan')
+    industry = db.relationship('Industry', back_populates='user', cascade='all, delete-orphan')
     
     # Serialization rules
-    serialize_rules = ('-credits', '-produce', '-transactions',)
+    serialize_rules = ('-password', '-credits', '-transactions', '-production', '-industry',)
 
     def __repr__(self):
         return f'<User {self.id} {self.first_name} {self.last_name}>'
@@ -119,7 +118,7 @@ class Industry(db.Model, SerializerMixin):
     pricing = db.relationship('Pricing', back_populates='industry')
 
     # Serialization rules
-    serialize_rules = ('-user.industry', '-product.industry', '-production.industry')
+    serialize_rules = ('-user.industry', '-product.industry', '-production.industry', '-pricing.industry',)
 
     def __repr__(self):
         return f'<Industry {self.id} {self.industry_name}>'
@@ -150,6 +149,7 @@ class Transaction(db.Model, SerializerMixin):
     transaction_date = db.Column(db.DateTime(timezone=True), server_default=func.now(), nullable=False)
     # transaction_date = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
     transaction_type = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=False)
     currency = db.Column(db.String, nullable=False)
     amount = db.Column(db.Float, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
