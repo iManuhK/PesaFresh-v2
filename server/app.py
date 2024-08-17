@@ -11,7 +11,7 @@ from datetime import timedelta
 import random, os
 
 # Add your model imports
-from models import db, User, Package
+from models import db, User, Pricing, Product, Production, Credit, Transaction, Industry
 from dotenv import load_dotenv
 load_dotenv()
 
