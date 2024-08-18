@@ -1,215 +1,274 @@
-2024-08-18 00:14:33,569 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2024-08-18 04:11:56,014 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5555
-2024-08-18 00:14:33,569 INFO: [33mPress CTRL+C to quit[0m
-2024-08-18 00:14:33,570 INFO:  * Restarting with stat
-2024-08-18 00:14:33,784 WARNING:  * Debugger is active!
-2024-08-18 00:14:33,793 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 00:21:18,626 INFO: 127.0.0.1 - - [18/Aug/2024 00:21:18] "[35m[1mGET /users HTTP/1.1[0m" 500 -
-2024-08-18 00:25:42,789 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 00:25:42,841 INFO:  * Restarting with stat
-2024-08-18 00:25:43,196 WARNING:  * Debugger is active!
-2024-08-18 00:25:43,201 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 00:36:56,167 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
-2024-08-18 00:36:56,227 INFO:  * Restarting with stat
-2024-08-18 00:36:56,590 WARNING:  * Debugger is active!
-2024-08-18 00:36:56,596 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 00:37:30,905 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
-2024-08-18 00:37:30,950 INFO:  * Restarting with stat
-2024-08-18 00:37:31,286 WARNING:  * Debugger is active!
-2024-08-18 00:37:31,290 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 00:37:37,323 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
-2024-08-18 00:37:37,380 INFO:  * Restarting with stat
-2024-08-18 00:37:37,700 WARNING:  * Debugger is active!
-2024-08-18 00:37:37,704 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 00:37:38,717 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
-2024-08-18 00:37:38,769 INFO:  * Restarting with stat
-2024-08-18 00:46:41,097 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2024-08-18 04:11:56,014 INFO: [33mPress CTRL+C to quit[0m
+2024-08-18 04:11:56,014 INFO:  * Restarting with stat
+2024-08-18 04:11:56,230 WARNING:  * Debugger is active!
+2024-08-18 04:11:56,236 INFO:  * Debugger PIN: 617-080-234
+2024-08-18 04:12:14,876 INFO: 127.0.0.1 - - [18/Aug/2024 04:12:14] "[35m[1mPOST /users HTTP/1.1[0m" 201 -
+2024-08-18 04:12:23,366 INFO: 127.0.0.1 - - [18/Aug/2024 04:12:23] "GET /users HTTP/1.1" 200 -
+2024-08-18 04:12:29,854 ERROR: Error: Object of type function is not JSON serializable
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 493, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 522, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/representations/json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type function is not JSON serializable
+2024-08-18 04:12:29,859 INFO: 127.0.0.1 - - [18/Aug/2024 04:12:29] "[35m[1mGET /my-transactions HTTP/1.1[0m" 500 -
+2024-08-18 04:12:31,902 ERROR: Error: Object of type function is not JSON serializable
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 493, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 522, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/representations/json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type function is not JSON serializable
+2024-08-18 04:12:31,903 INFO: 127.0.0.1 - - [18/Aug/2024 04:12:31] "[35m[1mGET /my-transactions HTTP/1.1[0m" 500 -
+2024-08-18 04:12:39,735 ERROR: Error: Object of type function is not JSON serializable
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 493, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 522, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/representations/json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type function is not JSON serializable
+2024-08-18 04:12:39,736 INFO: 127.0.0.1 - - [18/Aug/2024 04:12:39] "[35m[1mGET /my-transactions HTTP/1.1[0m" 500 -
+2024-08-18 04:12:51,325 ERROR: Error: Object of type function is not JSON serializable
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 493, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 522, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/representations/json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type function is not JSON serializable
+2024-08-18 04:12:51,326 INFO: 127.0.0.1 - - [18/Aug/2024 04:12:51] "[35m[1mGET /my-transactions HTTP/1.1[0m" 500 -
+2024-08-18 04:13:09,019 ERROR: Error: Object of type function is not JSON serializable
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 493, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 522, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/representations/json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type function is not JSON serializable
+2024-08-18 04:13:09,021 INFO: 127.0.0.1 - - [18/Aug/2024 04:13:09] "[35m[1mGET /my-transactions HTTP/1.1[0m" 500 -
+2024-08-18 04:18:23,654 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
+2024-08-18 04:18:23,705 INFO:  * Restarting with stat
+2024-08-18 04:18:24,134 WARNING:  * Debugger is active!
+2024-08-18 04:18:24,140 INFO:  * Debugger PIN: 617-080-234
+2024-08-18 04:18:47,355 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
+2024-08-18 04:18:47,408 INFO:  * Restarting with stat
+2024-08-18 04:18:47,724 WARNING:  * Debugger is active!
+2024-08-18 04:18:47,729 INFO:  * Debugger PIN: 617-080-234
+2024-08-18 04:18:52,965 ERROR: Error: Object of type function is not JSON serializable
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 493, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 522, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/representations/json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type function is not JSON serializable
+2024-08-18 04:18:52,970 INFO: 127.0.0.1 - - [18/Aug/2024 04:18:52] "[35m[1mGET /my-transactions HTTP/1.1[0m" 500 -
+2024-08-18 04:18:54,200 ERROR: Error: Object of type function is not JSON serializable
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 493, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 522, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/representations/json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type function is not JSON serializable
+2024-08-18 04:18:54,202 INFO: 127.0.0.1 - - [18/Aug/2024 04:18:54] "[35m[1mGET /my-transactions HTTP/1.1[0m" 500 -
+2024-08-18 04:19:01,867 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
+2024-08-18 04:19:01,928 INFO:  * Restarting with stat
+2024-08-18 04:19:02,281 WARNING:  * Debugger is active!
+2024-08-18 04:19:02,286 INFO:  * Debugger PIN: 617-080-234
+2024-08-18 04:19:09,349 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
+2024-08-18 04:19:09,403 INFO:  * Restarting with stat
+2024-08-18 04:19:09,764 WARNING:  * Debugger is active!
+2024-08-18 04:19:09,779 INFO:  * Debugger PIN: 617-080-234
+2024-08-18 04:19:11,053 ERROR: Error: Object of type function is not JSON serializable
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 493, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 522, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/representations/json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type function is not JSON serializable
+2024-08-18 04:19:11,058 INFO: 127.0.0.1 - - [18/Aug/2024 04:19:11] "[35m[1mGET /my-transactions HTTP/1.1[0m" 500 -
+2024-08-18 04:19:11,888 ERROR: Error: Object of type function is not JSON serializable
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 493, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 522, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/representations/json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type function is not JSON serializable
+2024-08-18 04:19:11,890 INFO: 127.0.0.1 - - [18/Aug/2024 04:19:11] "[35m[1mGET /my-transactions HTTP/1.1[0m" 500 -
+2024-08-18 04:19:20,873 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
+2024-08-18 04:19:20,938 INFO:  * Restarting with stat
+2024-08-18 04:19:21,254 WARNING:  * Debugger is active!
+2024-08-18 04:19:21,259 INFO:  * Debugger PIN: 617-080-234
+2024-08-18 04:19:24,286 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
+2024-08-18 04:19:24,323 INFO:  * Restarting with stat
+2024-08-18 04:19:24,544 WARNING:  * Debugger is active!
+2024-08-18 04:19:24,548 INFO:  * Debugger PIN: 617-080-234
+2024-08-18 04:22:18,069 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
+2024-08-18 04:22:18,128 INFO:  * Restarting with stat
+2024-08-18 04:22:18,473 WARNING:  * Debugger is active!
+2024-08-18 04:22:18,479 INFO:  * Debugger PIN: 617-080-234
+2024-08-18 04:22:22,515 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
+2024-08-18 04:22:22,550 INFO:  * Restarting with stat
+2024-08-18 04:22:22,779 WARNING:  * Debugger is active!
+2024-08-18 04:22:22,783 INFO:  * Debugger PIN: 617-080-234
+2024-08-18 04:22:27,821 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
+2024-08-18 04:22:27,902 INFO:  * Restarting with stat
+2024-08-18 04:22:28,186 WARNING:  * Debugger is active!
+2024-08-18 04:22:28,192 INFO:  * Debugger PIN: 617-080-234
+2024-08-18 04:23:09,534 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
+2024-08-18 04:23:09,586 INFO:  * Restarting with stat
+2024-08-18 04:25:01,581 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5555
-2024-08-18 00:46:41,097 INFO: [33mPress CTRL+C to quit[0m
-2024-08-18 00:46:41,098 INFO:  * Restarting with stat
-2024-08-18 00:46:41,319 WARNING:  * Debugger is active!
-2024-08-18 00:46:41,327 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 00:46:45,518 INFO: 127.0.0.1 - - [18/Aug/2024 00:46:45] "GET /users HTTP/1.1" 200 -
-2024-08-18 00:48:33,219 INFO: 127.0.0.1 - - [18/Aug/2024 00:48:33] "[35m[1mPOST /users HTTP/1.1[0m" 201 -
-2024-08-18 00:49:09,952 INFO: 127.0.0.1 - - [18/Aug/2024 00:49:09] "GET /users HTTP/1.1" 200 -
-2024-08-18 00:50:14,453 INFO: 127.0.0.1 - - [18/Aug/2024 00:50:14] "POST /login HTTP/1.1" 200 -
-2024-08-18 00:51:02,034 ERROR: Error: name 'Package' is not defined
+2024-08-18 04:25:01,582 INFO: [33mPress CTRL+C to quit[0m
+2024-08-18 04:25:01,582 INFO:  * Restarting with stat
+2024-08-18 04:25:01,798 WARNING:  * Debugger is active!
+2024-08-18 04:25:01,804 INFO:  * Debugger PIN: 617-080-234
+2024-08-18 04:25:05,015 ERROR: Error: Object of type function is not JSON serializable
 Traceback (most recent call last):
   File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
     rv = self.dispatch_request()
   File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
-    resp = resource(*args, **kwargs)
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
-    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
-    resp = meth(*args, **kwargs)
-  File "/Users/emmanuel/Development/projects/PFapp/server/app.py", line 220, in get
-    packages = [package.to_dict() for package in Package.query.all()]
-NameError: name 'Package' is not defined
-2024-08-18 00:51:02,040 INFO: 127.0.0.1 - - [18/Aug/2024 00:51:02] "[35m[1mGET /loans HTTP/1.1[0m" 500 -
-2024-08-18 00:51:23,909 ERROR: Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/werkzeug/routing/map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-2024-08-18 00:51:23,914 INFO: 127.0.0.1 - - [18/Aug/2024 00:51:23] "[35m[1mGET /current-user HTTP/1.1[0m" 500 -
-2024-08-18 00:52:12,495 INFO: 127.0.0.1 - - [18/Aug/2024 00:52:12] "[31m[1mGET /current_user HTTP/1.1[0m" 401 -
-2024-08-18 00:53:22,414 INFO: 127.0.0.1 - - [18/Aug/2024 00:53:22] "GET /current_user HTTP/1.1" 200 -
-2024-08-18 00:56:45,983 INFO: 127.0.0.1 - - [18/Aug/2024 00:56:45] "POST /logout HTTP/1.1" 200 -
-2024-08-18 00:57:48,202 INFO: 127.0.0.1 - - [18/Aug/2024 00:57:48] "GET /users HTTP/1.1" 200 -
-2024-08-18 01:00:52,958 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:00:53,001 INFO:  * Restarting with stat
-2024-08-18 01:00:53,372 WARNING:  * Debugger is active!
-2024-08-18 01:00:53,378 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:02:26,162 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:02:26,215 INFO:  * Restarting with stat
-2024-08-18 01:02:26,562 WARNING:  * Debugger is active!
-2024-08-18 01:02:26,567 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:02:37,654 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:02:37,705 INFO:  * Restarting with stat
-2024-08-18 01:02:38,041 WARNING:  * Debugger is active!
-2024-08-18 01:02:38,046 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:02:39,062 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:02:39,123 INFO:  * Restarting with stat
-2024-08-18 01:02:39,344 WARNING:  * Debugger is active!
-2024-08-18 01:02:39,348 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:02:47,411 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:02:47,453 INFO:  * Restarting with stat
-2024-08-18 01:02:47,678 WARNING:  * Debugger is active!
-2024-08-18 01:02:47,683 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:02:51,715 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:02:51,777 INFO:  * Restarting with stat
-2024-08-18 01:33:43,296 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:5555
-2024-08-18 01:33:43,296 INFO: [33mPress CTRL+C to quit[0m
-2024-08-18 01:33:43,297 INFO:  * Restarting with stat
-2024-08-18 01:33:43,548 WARNING:  * Debugger is active!
-2024-08-18 01:33:43,557 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:33:48,734 INFO: 127.0.0.1 - - [18/Aug/2024 01:33:48] "GET /transactions HTTP/1.1" 200 -
-2024-08-18 01:34:23,915 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:34:23,967 INFO:  * Restarting with stat
-2024-08-18 01:34:24,313 WARNING:  * Debugger is active!
-2024-08-18 01:34:24,324 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:34:38,461 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:34:38,516 INFO:  * Restarting with stat
-2024-08-18 01:34:38,827 WARNING:  * Debugger is active!
-2024-08-18 01:34:38,831 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:35:15,138 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:35:15,208 INFO:  * Restarting with stat
-2024-08-18 01:35:15,664 WARNING:  * Debugger is active!
-2024-08-18 01:35:15,670 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:35:16,682 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:35:16,748 INFO:  * Restarting with stat
-2024-08-18 01:35:17,125 WARNING:  * Debugger is active!
-2024-08-18 01:35:17,132 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:35:19,158 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:35:19,208 INFO:  * Restarting with stat
-2024-08-18 01:35:19,429 WARNING:  * Debugger is active!
-2024-08-18 01:35:19,433 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:35:21,449 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:35:21,481 INFO:  * Restarting with stat
-2024-08-18 01:45:32,201 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:5555
-2024-08-18 01:45:32,201 INFO: [33mPress CTRL+C to quit[0m
-2024-08-18 01:45:32,202 INFO:  * Restarting with stat
-2024-08-18 01:45:32,421 WARNING:  * Debugger is active!
-2024-08-18 01:45:32,427 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:45:36,350 ERROR: Error: wrapper() got an unexpected keyword argument 'id'
-Traceback (most recent call last):
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
-    resp = resource(*args, **kwargs)
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
-    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
-    resp = meth(*args, **kwargs)
-TypeError: wrapper() got an unexpected keyword argument 'id'
-2024-08-18 01:45:36,354 INFO: 127.0.0.1 - - [18/Aug/2024 01:45:36] "[35m[1mGET /my-productions/user/1 HTTP/1.1[0m" 500 -
-2024-08-18 01:46:58,203 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:46:58,247 INFO:  * Restarting with stat
-2024-08-18 01:46:58,728 WARNING:  * Debugger is active!
-2024-08-18 01:46:58,735 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:47:01,762 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:47:01,809 INFO:  * Restarting with stat
-2024-08-18 01:47:02,066 WARNING:  * Debugger is active!
-2024-08-18 01:47:02,070 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:47:10,122 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:47:10,165 INFO:  * Restarting with stat
-2024-08-18 01:47:10,442 WARNING:  * Debugger is active!
-2024-08-18 01:47:10,449 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:47:11,468 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:47:11,525 INFO:  * Restarting with stat
-2024-08-18 01:47:11,747 WARNING:  * Debugger is active!
-2024-08-18 01:47:11,751 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:47:41,000 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:47:41,053 INFO:  * Restarting with stat
-2024-08-18 01:47:41,362 WARNING:  * Debugger is active!
-2024-08-18 01:47:41,367 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:47:45,407 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-08-18 01:47:45,470 INFO:  * Restarting with stat
-2024-08-18 01:47:45,695 WARNING:  * Debugger is active!
-2024-08-18 01:47:45,699 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:48:21,067 ERROR: Error: wrapper() got an unexpected keyword argument 'id'
-Traceback (most recent call last):
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
-    resp = resource(*args, **kwargs)
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
-    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
-    resp = meth(*args, **kwargs)
-TypeError: wrapper() got an unexpected keyword argument 'id'
-2024-08-18 01:48:21,075 INFO: 127.0.0.1 - - [18/Aug/2024 01:48:21] "[35m[1mGET /my-productions/user/1 HTTP/1.1[0m" 500 -
-2024-08-18 01:48:50,479 INFO: 127.0.0.1 - - [18/Aug/2024 01:48:50] "GET /transactions HTTP/1.1" 200 -
-2024-08-18 01:49:01,124 INFO: 127.0.0.1 - - [18/Aug/2024 01:49:01] "GET /current_user HTTP/1.1" 200 -
-2024-08-18 01:49:24,972 ERROR: Error: wrapper() got an unexpected keyword argument 'id'
-Traceback (most recent call last):
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
-    resp = resource(*args, **kwargs)
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
-    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
-    resp = meth(*args, **kwargs)
-TypeError: wrapper() got an unexpected keyword argument 'id'
-2024-08-18 01:49:24,973 INFO: 127.0.0.1 - - [18/Aug/2024 01:49:24] "[35m[1mGET /my-transactions/user/1 HTTP/1.1[0m" 500 -
-2024-08-18 01:49:34,133 ERROR: Error: wrapper() got an unexpected keyword argument 'id'
-Traceback (most recent call last):
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
-    resp = resource(*args, **kwargs)
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
-    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
-  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
-    resp = meth(*args, **kwargs)
-TypeError: wrapper() got an unexpected keyword argument 'id'
-2024-08-18 01:49:34,135 INFO: 127.0.0.1 - - [18/Aug/2024 01:49:34] "[35m[1mGET /my-productions/user/1 HTTP/1.1[0m" 500 -
-2024-08-18 01:49:52,896 INFO: 127.0.0.1 - - [18/Aug/2024 01:49:52] "GET /transactions HTTP/1.1" 200 -
-2024-08-18 01:50:47,373 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
-2024-08-18 01:50:47,424 INFO:  * Restarting with stat
-2024-08-18 01:50:47,768 WARNING:  * Debugger is active!
-2024-08-18 01:50:47,773 INFO:  * Debugger PIN: 617-080-234
-2024-08-18 01:50:51,803 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
-2024-08-18 01:50:51,853 INFO:  * Restarting with stat
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 493, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 522, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/representations/json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type function is not JSON serializable
+2024-08-18 04:25:05,019 INFO: 127.0.0.1 - - [18/Aug/2024 04:25:05] "[35m[1mGET /my-transactions HTTP/1.1[0m" 500 -
+2024-08-18 04:25:18,933 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/models.py', reloading
+2024-08-18 04:25:18,972 INFO:  * Restarting with stat

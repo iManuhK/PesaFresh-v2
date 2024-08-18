@@ -316,10 +316,10 @@ class Transactions(Resource):
             data = request.json
             new_transaction = Transaction(
                 user_id=data['user_id'],
-                product_id=data['product_id'],
-                quantity=data['quantity'],
-                price=data['price'],
-                status=data['status']
+                transaction_type=data['transaction_type'],
+                currency=data['currency'],
+                description=data['description'],
+                amount=data['amount']
             )
 
             db.session.add(new_transaction)
@@ -408,8 +408,10 @@ class Productions(Resource):
             data = request.json
             new_production = Production(
                 product_id=data['product_id'],
-                quantity=data['quantity'],
-                date=data['date']
+                production_in_UOM=data['production_in_UOM'],
+                pricing_id=data['pricing_id'],
+                industry_id=data['industry_id'],
+                user_id=data['user_id']
             )
 
             db.session.add(new_production)
@@ -485,41 +487,39 @@ class ProductionsByID(Resource):
 
 api.add_resource(ProductionsByID, '/productions/<int:id>')
 
-class myTransactions(Resource):
+class MyTransactions(Resource):
     @jwt_required
     def get(self):
         current_user = get_jwt_identity()
-        if current_user != id:
-            logging.warning(f"User {current_user} attempted to access transactions {id} without permission.")
-            return make_response(jsonify({"message": "Forbidden"}), 403)
-        
-        transactions = [transaction.to_dict() for transaction in Transaction.query.filter_by(user_id=id).all()]
+        print(f"Current user: {current_user}")
+
+        transactions = [transaction.to_dict() for transaction in Transaction.query.filter_by(user_id=current_user).all()]
+        print(f"Transactions found: {transactions}")
+
         if transactions:
             logging.info(f"User {current_user} accessed all their transactions.")
             return make_response(jsonify(transactions), 200)
         else:
-            logging.warning(f"User {current_user} tried to access transactions {id} that do not exist.")
+            logging.warning(f"User {current_user} tried to access transactions but none were found.")
             return make_response(jsonify({"message": "Transaction not found"}), 404)
 
-api.add_resource(myTransactions, '/my-transactions/user/<int:id>')
+api.add_resource(MyTransactions, '/my-transactions')
 
-class myProductions(Resource):
-    @jwt_required
+class MyProductions(Resource):
+    @jwt_required()
     def get(self):
         current_user = get_jwt_identity()
-        if current_user!= id:
-            logging.warning(f"User {current_user} attempted to access productions {id} without permission.")
-            return make_response(jsonify({"message": "Forbidden"}), 403)
         
-        productions = [production.to_dict() for production in Production.query.filter_by(product_id=id).all()]
+        productions = [production.to_dict() for production in Production.query.filter_by(user_id=current_user).all()]
+        
         if productions:
             logging.info(f"User {current_user} accessed all their productions.")
             return make_response(jsonify(productions), 200)
         else:
-            logging.warning(f"User {current_user} tried to access productions {id} that do not exist.")
-            return make_response(jsonify({"message": "Product not found"}), 404)
+            logging.warning(f"User {current_user} tried to access productions but none were found.")
+            return make_response(jsonify({"message": "Productions not found"}), 404)
 
-api.add_resource(myProductions, '/my-productions/user/<int:id>')
+api.add_resource(MyProductions, '/my-productions')
 
 
 if __name__ == '__main__':

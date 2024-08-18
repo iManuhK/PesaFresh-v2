@@ -21,14 +21,14 @@ class User(db.Model, SerializerMixin):
     password = db.Column(db.String(128), nullable=False)
     role = db.Column(db.String(30), nullable=True, default="user")
     active = db.Column(db.Boolean, default=True)
-    created_on = db.Column(db.DateTime(timezone=True), server_default=func.now(), nullable=False)
+    created_on = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
     updated_on = db.Column(db.DateTime, default=None, onupdate=db.func.now(), nullable=True)
 
     # Relationships
     credits = db.relationship('Credit', back_populates='user', cascade='all, delete-orphan')
     transactions = db.relationship('Transaction', back_populates='user', cascade='all, delete-orphan')
     production = db.relationship('Production', back_populates='user', cascade='all, delete-orphan')
-    industry = db.relationship('Industry', back_populates='user', cascade='all, delete-orphan')
+    industry = db.relationship('Industry', back_populates='user')
     
     # Serialization rules
     serialize_rules = ('-password', '-credits', '-transactions', '-production', '-industry',)
@@ -59,7 +59,7 @@ class Credit(db.Model, SerializerMixin):
     __tablename__ = 'credits'
     
     id = db.Column(db.Integer, primary_key=True)
-    date_borrowed = db.Column(db.DateTime(timezone=True), server_default=func.now(), nullable=False)
+    date_borrowed = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
     amount_borrowed = db.Column(db.Float, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     production_id = db.Column(db.Integer, db.ForeignKey('production.id'), nullable=False)
@@ -79,7 +79,7 @@ class Production(db.Model, SerializerMixin):
     __tablename__ = 'production'
     
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime(timezone=True), server_default=func.now(), nullable=False)
+    date = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
     production_in_UOM = db.Column(db.Float, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
@@ -94,7 +94,8 @@ class Production(db.Model, SerializerMixin):
     pricing = db.relationship('Pricing', back_populates='production')
 
     # Serialization rules
-    serialize_rules = ('-user.production', '-credits.production', '-product.production', '-industry.production', '-pricing.production')
+    # serialize_rules = ('-user.production', '-credits.production', '-product.production', '-industry.production', '-pricing.production')
+    serialize_only = ('date', 'production_in_UOM', )
 
     def __repr__(self):
         return f'<Production {self.id} {self.production_in_UOM}>'
@@ -140,14 +141,13 @@ class Pricing(db.Model, SerializerMixin):
     # Serialization rules
     serialize_rules = ('-product.pricing', '-industry.pricing', '-production.pricing')
     def __repr__(self):
-        return f"<Product {self.product_name}>"
-
+        return f'<Pricing {self.id} {self.Unit_Price}>'
+    
 class Transaction(db.Model, SerializerMixin):
     __tablename__ = 'transactions'
 
     id = db.Column(db.Integer, primary_key=True)
-    transaction_date = db.Column(db.DateTime(timezone=True), server_default=func.now(), nullable=False)
-    # transaction_date = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
+    transaction_date = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
     transaction_type = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
     currency = db.Column(db.String, nullable=False)
@@ -159,7 +159,18 @@ class Transaction(db.Model, SerializerMixin):
 
     # Serialization rules
     serialize_rules = ('-user.transactions',)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'transaction_date': self.transaction_date.isoformat(), 
+            # 'transaction_date': self.transaction_date.isoformat(), 
+            'transaction_type': self.transaction_type,
+            'description': self.description,
+            'currency': self.currency,
+            'amount': self.amount
+        }
 
     def __repr__(self):
-        return f"<Transaction {self.transaction_type} for User {self.user_id}>"
+        return f'<Transaction {self.id} {self.transaction_type}>'
     
