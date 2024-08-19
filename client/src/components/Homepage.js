@@ -1,12 +1,8 @@
 import React from 'react'
-import Header from './Header'
-import Footer from './Footer'
 
 function Homepage() {
   return (
     <>
-        <div>Homepage</div>
-        <Header />
         <div className="main-content">
             <div className="homepage-cards">
                 <div className="card-info">
@@ -48,7 +44,6 @@ function Homepage() {
                 <button>Register with us</button>
             </div>
         </div>
-        <Footer />
     </>
   )
 }

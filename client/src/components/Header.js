@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -6,7 +6,6 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
@@ -16,38 +15,36 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Badge } from '@mui/material';
-
+import { Link as Weblink } from 'react-router-dom';
 
 export default function Header() {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   return (
-    <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Typography sx={{ minWidth: 100 }}>Contact</Typography>
-        <Typography sx={{ minWidth: 100 }}>Profile</Typography>
+    <header>
+      <Box className="header-avatar">
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar>M</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
+
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -128,13 +125,25 @@ export default function Header() {
           Logout
         </MenuItem>
       </Menu>
+
       <div className="search">
         <input type="text" placeholder="Search..." />
       </div>
-      <div className="auth-buttons">
-        <div className="auth-login">Log In</div>
-        <div className="auth-logout">Sign Up</div>
+      <div className="header-nav">
+        <Weblink to='/' >Home
+        </Weblink>
+        <Weblink to='/about' >About
+        </Weblink>
       </div>
-    </>
+      <Divider orientation="vertical" variant="middle" flexItem />
+      <div className="menu-auth-buttons">
+        <div className="menu-auth-login">
+          <Weblink to='/login' >Login</Weblink>
+        </div>
+        <div className="menu-auth-register">
+          <Weblink to='/register' >Sign Up</Weblink>
+        </div>
+      </div>
+    </header>
   );
 }

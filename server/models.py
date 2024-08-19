@@ -93,9 +93,9 @@ class Production(db.Model, SerializerMixin):
     industry = db.relationship('Industry', back_populates='production')
     pricing = db.relationship('Pricing', back_populates='production')
 
-    # Serialization rules
-    # serialize_rules = ('-user.production', '-credits.production', '-product.production', '-industry.production', '-pricing.production')
-    serialize_only = ('date', 'production_in_UOM', )
+   
+    serialize_only = ('id', 'date', 'production_in_UOM', 'user_id.user.name', 'industry_id', 'pricing_id', 'product_id')
+   
 
     def __repr__(self):
         return f'<Production {self.id} {self.production_in_UOM}>'
@@ -160,17 +160,30 @@ class Transaction(db.Model, SerializerMixin):
     # Serialization rules
     serialize_rules = ('-user.transactions',)
     
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'transaction_date': self.transaction_date.isoformat(), 
-            # 'transaction_date': self.transaction_date.isoformat(), 
-            'transaction_type': self.transaction_type,
-            'description': self.description,
-            'currency': self.currency,
-            'amount': self.amount
-        }
 
     def __repr__(self):
         return f'<Transaction {self.id} {self.transaction_type}>'
-    
+
+def calculate_credit_limit(user_id):
+    # Get the start of the current month
+    now = datetime.utcnow()
+    start_of_month = datetime(now.year, now.month, 1)
+
+    # Query to get the cumulative production for the current month for the user
+    total_production = db.session.query(func.sum(Production.production_in_UOM)).filter(
+        Production.user_id == user_id,
+        Production.date >= start_of_month
+    ).scalar()
+
+    # Default to 0 if no production is found
+    if total_production is None:
+        total_production = 0
+
+    # Example calculation for credit limit based on total production
+    # You can adjust this formula based on your specific business rules
+    credit_limit = total_production * 10  # Example multiplier
+
+    return credit_limit
+
+
+        

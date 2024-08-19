@@ -1,22 +1,23 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
+import { login, logout } from '../../api';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const login = (userData) => {
-    // Implement login logic here (e.g., API call)
+  const loginUser = (userData) => {
+    login(userData)
     setUser(userData);
   };
 
-  const logout = () => {
-    // Implement logout logic here
+  const logoutUser = () => {
+    logout();
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, loginUser, logoutUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -488,13 +488,11 @@ class ProductionsByID(Resource):
 api.add_resource(ProductionsByID, '/productions/<int:id>')
 
 class MyTransactions(Resource):
-    @jwt_required
+    @jwt_required()
     def get(self):
         current_user = get_jwt_identity()
-        print(f"Current user: {current_user}")
 
         transactions = [transaction.to_dict() for transaction in Transaction.query.filter_by(user_id=current_user).all()]
-        print(f"Transactions found: {transactions}")
 
         if transactions:
             logging.info(f"User {current_user} accessed all their transactions.")
@@ -521,6 +519,287 @@ class MyProductions(Resource):
 
 api.add_resource(MyProductions, '/my-productions')
 
+class Credits(Resource):
+    def get(self):
+        credits = [credit.to_dict() for credit in Credit.query.all()]
+        return make_response(jsonify(credits), 200)
+    
+    def post(self):
+        try:
+            data = request.json
+            new_credit = Credit(
+                user_id=data['user_id'],
+                credit_limit=data['credit_limit'],
+                credit_balance=data['credit_balance'],
+                currency=data['currency']
+            )
+
+            db.session.add(new_credit)
+            db.session.commit()
+
+            credit_dict = new_credit.to_dict()
+            response_body = {'success': 'Credit created successfully', 'credit': credit_dict}
+            return make_response(jsonify(response_body), 201)
+        
+        except KeyError:
+            response_body = {'error': 'Could not create credit. Required fields missing.'}
+            return make_response(jsonify(response_body), 400)
+        
+        except Exception as e:
+            response_body = {'error': str(e)}
+            return make_response(jsonify(response_body), 400)
+        
+api.add_resource(Credits, '/credits')
+
+class CreditsByID(Resource):
+    def get(self, id):
+        credit = Credit.query.filter_by(id=id).first()
+        if credit:
+            credit_dict = credit.to_dict()
+            
+            return make_response(credit_dict, 200)
+         
+        else:
+            response_body = {
+                'message' : 'Credit does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+    
+    def patch(self, id):
+        credit = Credit.query.filter_by(id=id).first()
+        if credit:
+            try:
+                for attr in request.json:
+                    setattr(credit, attr, request.json.get(attr))
+
+                db.session.add(credit)
+                db.session.commit()
+
+                credit_dict = credit.to_dict()
+                return make_response(credit_dict, 200)
+            
+            except ValueError:
+                response_body = {
+                    'error': 'error occured'
+                }
+                return make_response(jsonify(response_body), 400)
+            except Exception as e:
+                response_body = {'error': str(e)}
+                return make_response(jsonify(response_body), 400)
+    
+    def delete(self, id):
+        credit = Credit.query.filter_by(id=id).first()
+        if credit:
+            db.session.delete(credit)
+            db.session.commit()
+
+            response_body = {
+               'message': 'Credit deleted Successfully'
+            }
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                'message' : 'Credit does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+
+api.add_resource(CreditsByID, '/credits/<int:id>')
+
+
+class Pricing(Resource):
+    def get(self):
+        pricing = [pricing.to_dict() for pricing in Pricing.query.all()]
+        return make_response(jsonify(pricing), 200)
+    
+    def post(self):
+        try:
+            data = request.json
+            new_pricing = Pricing(
+                product_id=data['product_id'],
+                industry_id=data['industry_id'],
+                price=data['price'],
+                currency=data['currency']
+            )
+
+            db.session.add(new_pricing)
+            db.session.commit()
+
+            pricing_dict = new_pricing.to_dict()
+            response_body = {'success': 'Pricing created successfully', 'pricing': pricing_dict}
+            return make_response(jsonify(response_body), 201)
+        
+        except KeyError:
+            response_body = {'error': 'Could not create pricing. Required fields missing.'}
+            return make_response(jsonify(response_body), 400)
+        
+        except Exception as e:
+            response_body = {'error': str(e)}
+            return make_response(jsonify(response_body), 400)
+
+api.add_resource(Pricing, '/pricing')
+
+class PricingByID(Resource):
+    def get(self, id):
+        pricing = Pricing.query.filter_by(id=id).first()
+        if pricing:
+            pricing_dict = pricing.to_dict()
+            
+            return make_response(pricing_dict, 200)
+         
+        else:
+            response_body = {
+                'message' : 'Pricing does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+    
+    def patch(self, id):
+        pricing = Pricing.query.filter_by(id=id).first()
+        if pricing:
+            try:
+                for attr in request.json:
+                    setattr(pricing, attr, request.json.get(attr))
+
+                db.session.add(pricing)
+                db.session.commit()
+
+                pricing_dict = pricing.to_dict()
+                return make_response(pricing_dict, 200)
+            
+            except ValueError:
+                response_body = {
+                    'error': 'error occured'
+                }
+                return make_response(jsonify(response_body), 400)
+            except Exception as e:
+                response_body = {'error': str(e)}
+                return make_response(jsonify(response_body), 400)
+    
+    def delete(self, id):
+        pricing = Pricing.query.filter_by(id=id).first()
+        if pricing:
+            db.session.delete(pricing)
+            db.session.commit()
+
+            response_body = {
+               'message': 'Pricing deleted Successfully'
+            }
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                'message' : 'Pricing does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+
+api.add_resource(PricingByID, '/pricing/<int:id>')
+
+class Industry(Resource):
+    def get(self):
+        industries = [industry.to_dict() for industry in Industry.query.all()]
+        return make_response(jsonify(industries), 200)
+    
+    def post(self):
+        try:
+            data = request.json
+            new_industry = Industry(
+                name=data['name']
+            )
+
+            db.session.add(new_industry)
+            db.session.commit()
+
+            industry_dict = new_industry.to_dict()
+            response_body = {'success': 'Industry created successfully', 'industry': industry_dict}
+            return make_response(jsonify(response_body), 201)
+        
+        except KeyError:
+            response_body = {'error': 'Could not create industry. Required fields missing.'}
+            return make_response(jsonify(response_body), 400)
+        
+        except Exception as e:
+            response_body = {'error': str(e)}
+            return make_response(jsonify(response_body), 400)
+
+api.add_resource(Industry, '/industries')
+
+class IndustryByID(Resource):
+    def get(self, id):
+        industry = Industry.query.filter_by(id=id).first()
+        if industry:
+            industry_dict = industry.to_dict()
+            
+            return make_response(industry_dict, 200)
+         
+        else:
+            response_body = {
+                'message' : 'Industry does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+    
+    def patch(self, id):
+        industry = Industry.query.filter_by(id=id).first()
+        if industry:
+            try:
+                for attr in request.json:
+                    setattr(industry, attr, request.json.get(attr))
+
+                db.session.add(industry)
+                db.session.commit()
+
+                industry_dict = industry.to_dict()
+                return make_response(industry_dict, 200)
+            
+            except ValueError:
+                response_body = {
+                    'error': 'error occured'
+                }
+                return make_response(jsonify(response_body), 400)
+            except Exception as e:
+                response_body = {'error': str(e)}
+                return make_response(jsonify(response_body), 400)
+    
+    def delete(self, id):
+        industry = Industry.query.filter_by(id=id).first()
+        if industry:
+            db.session.delete(industry)
+            db.session.commit()
+
+            response_body = {
+               'message': 'Industry deleted Successfully'
+            }
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                'message' : 'Industry does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+
+api.add_resource(IndustryByID, '/industries/<int:id>')
+
+@app.route('/calculate-credit-limit', methods=['GET'])
+def add_production(self,user_id, production_data):
+    # Create new production record
+    new_production = Production(
+        user_id=user_id,
+        **production_data
+    )
+    db.session.add(new_production)
+    db.session.commit()
+
+    # Recalculate and update credit limit
+    credit_limit = self.calculate_credit_limit(user_id)
+    user = User.query.get(user_id)
+    user.credit_limit = credit_limit
+    db.session.commit()
+
+    return new_production
+
+                     
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

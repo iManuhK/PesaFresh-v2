@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
 import { AuthProvider } from './components/ContextProvider/AuthContext';
+import Register from './components/RegisterUser';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -9,19 +11,19 @@ import AdminDashboard from './components/AdminDashboard';
 import Dashboard from './components/Dashboard';
 import About from './components/About';
 import Contact from './components/Contact';
-import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const App = () => {
-  <div className="root">
-    
-  </div>
   return (
     <AuthProvider>
       <Router>
+      <Header />
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route
@@ -33,6 +35,7 @@ const App = () => {
             element={<ProtectedRoute component={Dashboard} roles={['user', 'admin']} />}
           />
         </Routes>
+        <Footer />
       </Router>
     </AuthProvider>
   );
