@@ -104,12 +104,14 @@ export default function Header() {
           <AccountBalanceIcon fontSize="small" /> My account
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <ManageAccountsIcon fontSize="small" />
-          </ListItemIcon>
-          Manage my account
-        </MenuItem>
+        <Weblink to='/dashboard' >
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <ManageAccountsIcon fontSize="small" />
+            </ListItemIcon>
+            Manage my account
+          </MenuItem>
+        </Weblink>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />

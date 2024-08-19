@@ -668,7 +668,7 @@
 .menu-auth-login a,
 .menu-auth-register a {
   color: #fff;
-  background-color: #007bff;
+  background-color: #6c757d;
   padding: 6px 12px;
   border-radius: 4px;
   text-decoration: none;
@@ -678,7 +678,7 @@
 
 .menu-auth-login a:hover,
 .menu-auth-register a:hover {
-  background-color: #0056b3;
+  background-color: #6c757d;
 }
 
 .menu-auth-login a {
@@ -1011,4 +1011,56 @@
   top: -0.5rem;
   font-size: 0.875rem;
   color: #555;
+}
+
+
+/* End of Floating Form Group Styling */
+
+/* Beginning of Dashboard styling *//* Dashboard.css */
+.dashboard {
+  padding: 20px;
+}
+
+.credit-limit, .create-data-buttons {
+  margin-bottom: 20px;
+}
+
+.credit-limit h2, .create-data-buttons button {
+  margin: 10px 0;
+}
+
+.create-data-buttons button {
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+.controls input {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.controls button {
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+
+.production-table, .transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.production-table th, .transaction-table th,
+.production-table td, .transaction-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.production-table th, .transaction-table th {
+  background-color: #f4f4f4;
+  text-align: left;
 }
