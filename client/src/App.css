@@ -597,6 +597,9 @@
 /* header styles begin */
 /* General Header Styles */
 #header {
+  font-family: "Lato";
+  font-weight: 900;
+  font-style: normal;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -630,7 +633,7 @@
 }
 
 .search input[type="text"]:focus {
-  border-color: #007bff;
+  border-color: #174917;
   outline: none;
 }
 
@@ -641,14 +644,16 @@
 }
 
 .header-nav a {
-  color: #007bff;
+  /* color: #174917; */
+  color: #111;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .header-nav a:hover {
-  color: #0056b3;
+  color: #2c6f28;
+  ;
 }
 
 /* Auth Buttons */

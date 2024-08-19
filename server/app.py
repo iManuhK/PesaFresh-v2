@@ -29,7 +29,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY", "your_secret_key")
 app.config["SECRET_KEY"] = "s6hjx0an2mzoret"+str(random.randint(1,1000000000))
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
-app.config['ACCESS_TOKEN_EXPIRES'] = False
+app.config['ACCESS_TOKEN_EXPIRES'] = True
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 migrate = Migrate(app, db)
@@ -87,21 +87,6 @@ class Login(Resource):
     
 api.add_resource(Login, '/login')
 
-class Current_User(Resource):
-    @jwt_required()
-    def get(self):
-        current_user_id = get_jwt_identity()
-        current_user = User.query.get(current_user_id)
-        if current_user:
-            current_user_dict = current_user.to_dict()
-            return make_response(current_user_dict, 200)
-        else:
-            response_body = {
-                'message': 'User not current user'
-            }
-            return make_response(response_body, 404)
-        
-api.add_resource(Current_User, '/current_user')
 BLACKLIST = set()
 
 @jwt.token_in_blocklist_loader
@@ -121,6 +106,54 @@ class Logout(Resource):
             return make_response(response_body, 500)
 
 api.add_resource(Logout, '/logout')
+
+class Register(Resource):
+    def post(self):
+        email = request.json.get('email', None)
+        password = request.json.get('password', None)
+
+        if User.query.filter_by(email=email).first():
+            response_body = {
+                'error' : 'Email already exists'
+                }
+            return make_response(response_body, 400)
+
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        new_user = User(
+            first_name=request.json.get('first_name', ''),
+            last_name=request.json.get('last_name', ''),
+            role=request.json.get('role', 'user'),
+            username=request.json.get('username', ''),
+            email=email,
+            password=hashed_password,
+            active=request.json.get('active', True)
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        response_body = {
+           'message' : 'User registered successfully'
+        }
+        return make_response(response_body, 201)
+
+api.add_resource(Register, '/register')
+
+class Current_User(Resource):
+    @jwt_required()
+    def get(self):
+        current_user_id = get_jwt_identity()
+        current_user = User.query.get(current_user_id)
+        if current_user:
+            current_user_dict = current_user.to_dict()
+            return make_response(current_user_dict, 200)
+        else:
+            response_body = {
+                'message': 'User not current user'
+            }
+            return make_response(response_body, 404)
+        
+api.add_resource(Current_User, '/current_user')
 
 class Users(Resource):
     def get(self):

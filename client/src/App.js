@@ -4,7 +4,6 @@ import './App.css';
 import { AuthProvider } from './components/ContextProvider/AuthContext';
 import Register from './components/RegisterUser';
 import Login from './components/Login';
-import Logout from './components/Logout';
 import ProtectedRoute from './components/ProtectedRoute';
 import Homepage from './components/Homepage';
 import AdminDashboard from './components/AdminDashboard';
@@ -25,7 +24,6 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
           <Route
             path="/admin"
             element={<ProtectedRoute component={AdminDashboard} roles={['admin']} />}

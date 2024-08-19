@@ -1,52 +1,48 @@
 import axios from 'axios';
 
 const API_URL = 'http://127.0.0.1:5555';
-const jwtToken = localStorage.getItem('jwtToken');
+const getJwtToken = () => localStorage.getItem('jwt_Token');
 
 export const registerUser = async (userData) => {
-  try {
-    const response = await axios.post(`${API_URL}/users`, userData);
-    return response.data;
-  } catch (error) {
-    console.error('Error registering user:', error);
-    throw error;
-  }
+    try {
+        const response = await axios.post(`${API_URL}/users`, userData);
+        return response.data;
+    } catch (error) {
+        console.error('Error registering user:', error);
+        throw error;
+    }
 };
 
 export const login = async (credentials) => {
-  try {
-    const response = await axios.post(`${API_URL}/login`, credentials);
-    return response.data;
-  } catch (error) {
-    console.error('Error login:', error);
-    throw error;
-  }
+    try {
+        const response = await axios.post(`${API_URL}/login`, credentials);
+        const token = response.data.access_token;
+        if (token) {
+            localStorage.setItem('jwt_Token', token);
+        }
+        return token;
+    } catch (error) {
+        console.error('Error logging in:', error.response?.data || error.message || error);
+        throw error;
+    }
 };
 
 export const logout = async () => {
-  try {
-    // Ensure the token is available
-    if (!jwtToken) {
-      throw new Error('No JWT token found, user might not be logged in.');
+    try {
+        const token = getJwtToken();
+        if (!token) {
+            throw new Error('No token found');
+        }
+        const response = await axios.post(`${API_URL}/logout`, null, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        localStorage.removeItem('jwt_Token');
+        return response.status
+    } catch (error) {
+        console.error('Error logging out:', error.response?.data || error.message || error);
+        throw error;
     }
-
-    const response = await axios.post(
-      `${API_URL}/logout`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      }
-    );
-
-    // Clear the token after a successful logout
-    localStorage.removeItem('jwtToken');
-    
-    return response.data;
-  } catch (error) {
-    console.error('Error logging out:', error.message || error);
-    throw error;
-  }
 };
 
