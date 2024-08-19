@@ -4,21 +4,27 @@ import { login, logout } from '../../api';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const loginUser = async (userData) => {
     const loggedInUser = await login(userData);
-    
-    setUser(loggedInUser);
+    setCurrentUser(loggedInUser);
+    return loggedInUser;
   };
 
   const logoutUser = async () => {
-    await logout();
-    setUser(null);
+    try {
+      await logout();
+      setCurrentUser(null);
+    } catch (error) {
+      // Handle logout errors if necessary (e.g., display a message to the user)
+      console.error('Failed to log out:', error);
+    }
   };
+  
 
   return (
-    <AuthContext.Provider value={{ user, loginUser, logoutUser }}>
+    <AuthContext.Provider value={{ currentUser, loginUser, logoutUser }}>
       {children}
     </AuthContext.Provider>
   );

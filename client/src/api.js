@@ -25,6 +25,11 @@ export const login = async (credentials) => {
 
 export const logout = async () => {
   try {
+    // Ensure the token is available
+    if (!jwtToken) {
+      throw new Error('No JWT token found, user might not be logged in.');
+    }
+
     const response = await axios.post(
       `${API_URL}/logout`,
       {},
@@ -34,9 +39,14 @@ export const logout = async () => {
         },
       }
     );
+
+    // Clear the token after a successful logout
+    localStorage.removeItem('jwtToken');
+    
     return response.data;
   } catch (error) {
-    console.error('Error logging out:', error);
+    console.error('Error logging out:', error.message || error);
     throw error;
   }
 };
+
