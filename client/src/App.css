@@ -596,32 +596,17 @@
 
 /* header styles begin */
 /* General Header Styles */
-header {
+#header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  /* background-color: #fbfefb; */
-  /* background-color: #99cd94; */
-  background-color: #548350;
-  color: #fff;
+  /* background-color: #548350; */
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* color: #fff; */
 }
 
-/* Navigation */
-.header-nav {
-  display: flex;
-  gap: 20px;
-}
-
-.header-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.header-nav a:hover {
-  text-decoration: underline;
-}
 
 /* Account Menu Trigger */
 .header-avatar {
@@ -630,20 +615,82 @@ header {
   cursor: pointer;
 }
 
-/* Search Bar */
-.search {
-  flex: 1;
-  margin: 0 20px;
+/* Search bar styling */
+.search input[type="text"] {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 250px;
+  transition: all 0.3s ease;
 }
 
-.search input {
-  width: 100%;
-  padding: 8px 12px;
-  border-radius: 9px;
-  border: 1px solid #ccc;
+.search input[type="text"]::placeholder {
+  color: #6c757d;
+}
+
+.search input[type="text"]:focus {
+  border-color: #007bff;
   outline: none;
 }
+
+/* Navigation links */
+.header-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.header-nav a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+  color: #0056b3;
+}
+
 /* Auth Buttons */
+
+/* Auth buttons section */
+.menu-auth-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.menu-auth-login a,
+.menu-auth-register a {
+  color: #fff;
+  background-color: #007bff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.menu-auth-login a:hover,
+.menu-auth-register a:hover {
+  background-color: #0056b3;
+}
+
+.menu-auth-login a {
+  background-color: #6c757d;
+}
+
+.menu-auth-login a:hover {
+  background-color: #5a6268;
+}
+
+.menu-auth-register a {
+  background-color: #28a745;
+}
+
+.menu-auth-register a:hover {
+  background-color: #218838;
+}
 
 /* Register page styling start */
 
