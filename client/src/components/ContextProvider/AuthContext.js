@@ -6,13 +6,14 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const loginUser = (userData) => {
-    login(userData)
-    setUser(userData);
+  const loginUser = async (userData) => {
+    const loggedInUser = await login(userData);
+    
+    setUser(loggedInUser);
   };
 
-  const logoutUser = () => {
-    logout();
+  const logoutUser = async () => {
+    await logout();
     setUser(null);
   };
 

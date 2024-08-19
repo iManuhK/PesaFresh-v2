@@ -1,23 +1,33 @@
 import React, { useState } from 'react';
-import { Link as Weblink } from 'react-router-dom';
+import { Link as Weblink, useNavigate } from 'react-router-dom';
 import { useAuth } from './ContextProvider/AuthContext';
 
+
 export default function Login() {
-  const { login } = useAuth;
+  const { loginUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  function handleSubmit(e) {
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    login(email, password);
+    try {
+      await loginUser({ email, password });
+      alert("Login successful.!")
+      navigate('/');
+    } catch (error) {
+      console.error('Login failed:', error);
+      alert("Login failed:", error);
+    }
   }
 
   return (
     <section className="login-section">
       <div className="registration-image-background">
-            <div className="registration-image-overlay">
-              <img src="./images/MIT-Mobile-Money-2-Press.jpg" alt="background-image-registration-login" />
-            </div>
+        <div className="registration-image-overlay">
+          <img src="./images/MIT-Mobile-Money-2-Press.jpg" alt="background-image-registration-login" />
+        </div>
       </div>
       <div className="login-container">
         <div className="login-form-container">
@@ -56,7 +66,7 @@ export default function Login() {
                   <button className="login-submit-btn" type="submit">Login</button>
                 </div>
                 <div className="form-group">
-                <p className="register-login-text">Don't have an account? <Weblink to="/register" className="login-register-link">Sign Up Here</Weblink></p>
+                  <p className="register-login-text">Don't have an account? <Weblink to="/register" className="login-register-link">Sign Up Here</Weblink></p>
                 </div>
               </form>
             </div>

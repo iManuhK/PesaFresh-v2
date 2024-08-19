@@ -22827,3 +22827,26 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 2024-08-19 11:20:28,315 INFO:  * Restarting with stat
 2024-08-19 11:20:28,534 WARNING:  * Debugger is active!
 2024-08-19 11:20:28,545 INFO:  * Debugger PIN: 617-080-234
+2024-08-19 12:47:53,037 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5555
+2024-08-19 12:47:53,037 INFO: [33mPress CTRL+C to quit[0m
+2024-08-19 12:47:53,038 INFO:  * Restarting with stat
+2024-08-19 12:47:53,258 WARNING:  * Debugger is active!
+2024-08-19 12:47:53,265 INFO:  * Debugger PIN: 617-080-234
+2024-08-19 12:48:12,842 INFO: 127.0.0.1 - - [19/Aug/2024 12:48:12] "OPTIONS /login HTTP/1.1" 200 -
+2024-08-19 12:48:12,880 INFO: 127.0.0.1 - - [19/Aug/2024 12:48:12] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2024-08-19 12:49:28,765 INFO: 127.0.0.1 - - [19/Aug/2024 12:49:28] "POST /login HTTP/1.1" 200 -
+2024-08-19 12:50:02,771 INFO: 127.0.0.1 - - [19/Aug/2024 12:50:02] "OPTIONS /login HTTP/1.1" 200 -
+2024-08-19 12:50:03,014 INFO: 127.0.0.1 - - [19/Aug/2024 12:50:03] "POST /login HTTP/1.1" 200 -
+2024-08-19 12:50:16,530 INFO: 127.0.0.1 - - [19/Aug/2024 12:50:16] "OPTIONS /login HTTP/1.1" 200 -
+2024-08-19 12:50:16,777 INFO: 127.0.0.1 - - [19/Aug/2024 12:50:16] "POST /login HTTP/1.1" 200 -
+2024-08-19 12:50:17,878 INFO: 127.0.0.1 - - [19/Aug/2024 12:50:17] "POST /login HTTP/1.1" 200 -
+2024-08-19 12:50:18,437 INFO: 127.0.0.1 - - [19/Aug/2024 12:50:18] "POST /login HTTP/1.1" 200 -
+2024-08-19 12:50:18,675 INFO: 127.0.0.1 - - [19/Aug/2024 12:50:18] "POST /login HTTP/1.1" 200 -
+2024-08-19 12:50:18,862 INFO: 127.0.0.1 - - [19/Aug/2024 12:50:18] "POST /login HTTP/1.1" 200 -
+2024-08-19 12:50:19,052 INFO: 127.0.0.1 - - [19/Aug/2024 12:50:19] "POST /login HTTP/1.1" 200 -
+2024-08-19 12:50:19,267 INFO: 127.0.0.1 - - [19/Aug/2024 12:50:19] "POST /login HTTP/1.1" 200 -
+2024-08-19 12:51:09,892 INFO: 127.0.0.1 - - [19/Aug/2024 12:51:09] "OPTIONS /login HTTP/1.1" 200 -
+2024-08-19 12:51:10,127 INFO: 127.0.0.1 - - [19/Aug/2024 12:51:10] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2024-08-19 12:56:23,380 INFO: 127.0.0.1 - - [19/Aug/2024 12:56:23] "OPTIONS /login HTTP/1.1" 200 -
+2024-08-19 12:56:23,630 INFO: 127.0.0.1 - - [19/Aug/2024 12:56:23] "POST /login HTTP/1.1" 200 -
