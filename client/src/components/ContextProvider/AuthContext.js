@@ -7,9 +7,13 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
   const loginUser = async (userData) => {
-    const loggedInUser = await login(userData);
-    setCurrentUser(loggedInUser);
-    return loggedInUser;
+    try {
+      const loggedInUser = await login(userData);
+      setCurrentUser(loggedInUser);
+      localStorage.setItem('jwtToken', loggedInUser.token); // Save the JWT token after login
+    } catch (error) {
+      console.error('Failed to log in:', error);
+    }
   };
 
   const logoutUser = async () => {
