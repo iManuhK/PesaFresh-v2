@@ -2,7 +2,7 @@
 
 from faker import Faker
 from datetime import datetime
-from models import db, User, Product, Credit, Production, Industry, Pricing, Transaction
+from models import db, User, Product, Credit, Production, Industry, Pricing, Transaction, Payment
 from app import app
 
 faker = Faker()
@@ -10,6 +10,7 @@ faker = Faker()
 def delete_existing_data():
     try:
         Transaction.query.delete()
+        Payment.query.delete()
         Credit.query.delete()
         Production.query.delete()
         Pricing.query.delete()
@@ -63,7 +64,6 @@ def seed_industries(n, users, products):
             address=faker.address(),
             collection_point=faker.address(),
             contact_person=faker.name(),
-            user_id=faker.random_element(users).id,
             product_id=faker.random_element(products).id,
         )
         industries.append(industry)
@@ -75,8 +75,8 @@ def seed_pricing(n, products, industries):
     pricing_list = []
     for _ in range(n):
         pricing = Pricing(
-            Unit_of_Measure=faker.random_element(elements=('kg', 'ltr', 'piece')),
-            Unit_Price=faker.random_number(digits=2),
+            unit_of_measure=faker.random_element(elements=('kg', 'ltr', 'piece')),
+            unit_price=faker.random_number(digits=2),
             product_id=faker.random_element(products).id,
             industry_id=faker.random_element(industries).id,
         )
@@ -108,7 +108,7 @@ def seed_credits(n, users, productions):
             date_borrowed=faker.date_time_this_year(),
             amount_borrowed=faker.random_number(digits=5),
             user_id=faker.random_element(users).id,
-            production_id=faker.random_element(productions).id if productions else None
+            payment_status=faker.random_element(elements=('pending', 'processing','disbursed', 'cancelled'))
         )
         credits.append(credit)
         db.session.add(credit)
@@ -131,6 +131,24 @@ def seed_transactions(n, users):
     db.session.commit()
     return transactions
 
+def seed_payments(n, users, credits):
+    payments = []
+    for _ in range(n):
+        payment = Payment(
+            payment_date=faker.date_time_this_year(),
+            description=faker.text(max_nb_chars=70),
+            currency=faker.currency_code(),
+            amount=faker.random_number(digits=3),
+            user_id=faker.random_element(users).id,
+            credit_id=faker.random_element(credits).id if credits else None
+        )
+        payments.append(payment)
+        db.session.add(payment)
+
+    db.session.commit()
+    return payments
+
+
 def seed_database():
     delete_existing_data()
     users = seed_users(10)
@@ -138,7 +156,8 @@ def seed_database():
     industries = seed_industries(10, users, products)
     pricing_list = seed_pricing(10, products, industries)
     productions = seed_production(10, users, products, industries, pricing_list)
-    seed_credits(10, users, productions)
+    credits = seed_credits(10, users, productions)
+    seed_payments(10, users, credits)
     seed_transactions(10, users)
 
 if __name__ == "__main__":

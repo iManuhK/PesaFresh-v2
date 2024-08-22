@@ -3,15 +3,16 @@ import axios from 'axios';
 const API_URL = 'http://127.0.0.1:5555';
 const getJwtToken = () => localStorage.getItem('jwt_Token');
 
-export const registerUser = async (userData) => {
+const registerUser = async (userData) => {
     try {
-        const response = await axios.post(`${API_URL}/users`, userData);
+        const response = await axios.post(`${API_URL}/register`, userData);
         return response.data;
     } catch (error) {
         console.error('Error registering user:', error);
         throw error;
     }
 };
+export default registerUser;
 
 export const login = async (credentials) => {
     try {

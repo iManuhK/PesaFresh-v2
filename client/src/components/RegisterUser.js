@@ -1,25 +1,40 @@
 import React, { useState } from 'react';
-import { Link as Weblink } from 'react-router-dom';
-import { useAuth } from './ContextProvider/AuthContext';
+import { Link as Weblink, useNavigate } from 'react-router-dom';
+import registerUser from '../api.js';
+
 
 function Register() {
-  const { register } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [first_name, setName] = useState("");
   const [username, setUserName] = useState("");
+  const navigate = useNavigate();
+
 
   function handleSubmit(e) {
     e.preventDefault();
     if (password !== repeatPassword) {
-      alert("Passwords do not match");
-      return;
+        alert("Passwords do not match");
+        return;
     }
-    register(first_name, username, email, password);
-  }
-
+    const userData = {
+        first_name,
+        username,
+        email,
+        password
+    };
+    registerUser(userData)
+      .then(response => {
+        //   alert(`User ${response.data.username} registered successfully`);
+          navigate('/login')
+      })
+      .catch(error => {
+          console.error('Registration failed:', error);
+          // Handle the error (e.g., show an error message)
+      });
+}
   return (
     <section className="registration-page">
         <div className="registration-image-background">

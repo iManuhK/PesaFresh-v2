@@ -98,7 +98,7 @@ export default function Header() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
+          <Avatar /> Profile {}
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <AccountBalanceIcon fontSize="small" /> My account

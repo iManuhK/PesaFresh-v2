@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link as Weblink } from 'react-router-dom'
 
 function Homepage() {
   return (
@@ -41,7 +42,9 @@ function Homepage() {
             <div className="call-to-action">
                 <h2>Join the movement</h2>
                 <p>If you would like to find out more about PesaFresh credits, find out how much you qualify for by taking the first step</p>
-                <button>Register with us</button>
+                <Weblink to = '/register'>
+                    <button>Register with us</button>
+                </Weblink>
             </div>
         </div>
     </>

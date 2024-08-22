@@ -1,65 +1,65 @@
-import React, { useState } from 'react';
-
-const mockProductionData = [
-  {
-    id: 1,
-    productName: 'Tea',
-    quantity: 1000,
-    pricePerUnit: 1.5,
-    totalValue: 1500,
-    date: '2024-08-10'
-  },
-  {
-    id: 2,
-    productName: 'Milk',
-    quantity: 800,
-    pricePerUnit: 1.2,
-    totalValue: 960,
-    date: '2024-07-25'
-  },
-  {
-    id: 3,
-    productName: 'Tomatoes',
-    quantity: 600,
-    pricePerUnit: 2.0,
-    totalValue: 1200,
-    date: '2024-08-15'
-  }
-];
-
-const mockTransactionData = [
-  {
-    id: 1,
-    date: '2024-08-01',
-    description: 'Payment Received',
-    type: 'Credit',
-    amount: 2000
-  },
-  {
-    id: 2,
-    date: '2024-08-05',
-    description: 'Purchase of Seeds',
-    type: 'Debit',
-    amount: 500
-  },
-  {
-    id: 3,
-    date: '2024-08-10',
-    description: 'Sale of Tea',
-    type: 'Credit',
-    amount: 1500
-  }
-];
+import React, { useState, useEffect } from 'react';
 
 function Dashboard() {
-  const [productionData, setProductionData] = useState(mockProductionData);
-  const [transactionData] = useState(mockTransactionData); // No need for setState as it's static
   const [filter, setFilter] = useState('');
   const [sortBy, setSortBy] = useState('date');
+  const [myTransactions, setMyTransactions] = useState([]);
+  const [myProductions, setMyProductions] = useState([]);
+
+
+  useEffect(() => {
+    // Define an async function to fetch data
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5555/dashboard/my-transactions`,
+          {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('jwt_Token')}`
+            }
+          }
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setMyTransactions(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData();
+  
+  }, []);
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5555/dashboard/my-productions`,
+          {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('jwt_Token')}`
+            }
+          }
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setMyProductions(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData();
+  
+  }, []);
 
   const handleSort = (field) => {
-    const sortedData = [...productionData].sort((a, b) => (a[field] > b[field] ? 1 : -1));
-    setProductionData(sortedData);
+    const sortedData = [...myProductions].sort((a, b) => (a[field] > b[field] ? 1 : -1));
+    setMyProductions(sortedData);
     setSortBy(field);
   };
 
@@ -67,15 +67,15 @@ function Dashboard() {
     setFilter(e.target.value);
   };
 
-  const filteredProductionData = productionData.filter(item =>
-    item.productName.toLowerCase().includes(filter.toLowerCase())
-  );
+  // const filteredProductionData = myProductions.filter(item =>
+  //   // item.product_id.toLowerCase().includes(filter.toLowerCase())
+  // );
 
   const downloadStatement = () => {
     const csvContent = [
-      ['Product Name', 'Quantity', 'Price per Unit', 'Total Value', 'Date'],
-      ...filteredProductionData.map(item => [
-        item.productName,
+      ['Date', 'Product Name', 'Quantity', 'Industry Name'],
+      ...myTransactions.map(item => [
+        item.product_id,
         item.quantity,
         item.pricePerUnit,
         item.totalValue,
@@ -95,16 +95,58 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
+      <div className="user-identity">
+        <h1>Welcome <span>UserX</span></h1>
+      </div>
       <div className="credit-limit">
         <h2>Credit Limit</h2>
-        <p>Your credit limit is Ksh.10,000</p>
+        <p>Your credit limit is Ksh. <span>10,000</span></p>
+      </div>
+      <div className="loans">
+        <h2>Active Loan Amount Ksh. <span>5,000</span></h2>
+        <p> status</p>
+        <h2>Borrowing History</h2>
+      <div className="controls">
+        <button onClick={() => handleSort('date')}>Sort by Date</button>
+        <button onClick={downloadStatement}>Download Statement</button>
+      </div>
+      <table className="borrowing-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Currency</th>
+            <th>Description</th>
+            <th>Amount borrowed</th>
+            <th>Amount paid</th>
+            <th>Remaining amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {myTransactions.length > 0? (
+          myTransactions.map(transaction => (
+            <tr key={transaction.id}>
+              <td>{transaction.transaction_date}</td>
+              <td>{transaction.currency}</td>
+              <td>{transaction.description}</td>
+              <td>{transaction.transaction_type}</td>
+              <td>{transaction.amount.toFixed(2)}</td>
+            </tr>
+          ))
+          ): (
+            <tr>
+              <td colSpan="5" style={{ textAlign: 'center' }}>No Data Available!</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
       </div>
       <div className="create-data-buttons">
         <button>Borrow</button>
         <button>Transact</button>
         <button>Produce</button>
       </div>
-      <h1>Production Data</h1>
+      <h2>Production Data</h2>
       <div className="controls">
         <input
           type="text"
@@ -112,30 +154,34 @@ function Dashboard() {
           value={filter}
           onChange={handleFilter}
         />
-        <button onClick={() => handleSort('productName')}>Sort by Product Name</button>
+        <button onClick={() => handleSort('product_id')}>Sort by Product Name</button>
         <button onClick={() => handleSort('date')}>Sort by Date</button>
-        <button onClick={downloadStatement}>Download Statement</button>
+        <button onClick={downloadStatement}>Export to Excel</button>
       </div>
       <table className="production-table">
         <thead>
           <tr>
+            <th>Date</th>
             <th>Product Name</th>
             <th>Quantity</th>
-            <th>Price per Unit</th>
-            <th>Total Value</th>
-            <th>Date</th>
+            <th>Factory</th>
           </tr>
         </thead>
         <tbody>
-          {filteredProductionData.map(item => (
-            <tr key={item.id}>
-              <td>{item.productName}</td>
-              <td>{item.quantity}</td>
-              <td>{item.pricePerUnit.toFixed(2)}</td>
-              <td>{item.totalValue.toFixed(2)}</td>
-              <td>{item.date}</td>
+          {myProductions.length > 0 ? (
+            myProductions.map(item => (
+              <tr key={item.id}>
+                <td>{item.date}</td>
+                <td>{item.product_id}</td>
+                <td>{item.production_in_UOM.toFixed(2)}</td>
+                <td>{item.industry_id}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="5" style={{ textAlign: 'center' }}>No Data Available!</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 
@@ -147,7 +193,6 @@ function Dashboard() {
           value={filter}
           onChange={handleFilter}
         />
-        <button onClick={() => handleSort('productName')}>Sort by Product Name</button>
         <button onClick={() => handleSort('date')}>Sort by Date</button>
         <button onClick={downloadStatement}>Download Statement</button>
       </div>
@@ -155,20 +200,28 @@ function Dashboard() {
         <thead>
           <tr>
             <th>Date</th>
+            <th>Currency</th>
             <th>Description</th>
             <th>Type</th>
             <th>Amount</th>
           </tr>
         </thead>
         <tbody>
-          {transactionData.map(transaction => (
+          {myTransactions.length > 0? (
+          myTransactions.map(transaction => (
             <tr key={transaction.id}>
-              <td>{transaction.date}</td>
+              <td>{transaction.transaction_date}</td>
+              <td>{transaction.currency}</td>
               <td>{transaction.description}</td>
-              <td>{transaction.type}</td>
+              <td>{transaction.transaction_type}</td>
               <td>{transaction.amount.toFixed(2)}</td>
             </tr>
-          ))}
+          ))
+          ): (
+            <tr>
+              <td colSpan="5" style={{ textAlign: 'center' }}>No Data Available!</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

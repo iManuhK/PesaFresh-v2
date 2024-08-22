@@ -3,12 +3,12 @@ from sqlalchemy.sql import func
 from sqlalchemy import MetaData
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from sqlalchemy.ext.associationproxy import association_proxy
 
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
 db = SQLAlchemy(metadata=metadata)
-
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
     
@@ -25,16 +25,17 @@ class User(db.Model, SerializerMixin):
     updated_on = db.Column(db.DateTime, default=None, onupdate=db.func.now(), nullable=True)
 
     # Relationships
-    credits = db.relationship('Credit', back_populates='user', cascade='all, delete-orphan')
     transactions = db.relationship('Transaction', back_populates='user', cascade='all, delete-orphan')
     production = db.relationship('Production', back_populates='user', cascade='all, delete-orphan')
-    industry = db.relationship('Industry', back_populates='user')
-    
+    credits = db.relationship('Credit', back_populates='user', cascade='all, delete-orphan')
+    payments = db.relationship('Payment', back_populates='user', cascade='all, delete-orphan')
+
     # Serialization rules
-    serialize_rules = ('-password', '-credits', '-transactions', '-production', '-industry',)
+    serialize_rules = ('-password', '-credits', '-transactions', '-production','-payments',)
 
     def __repr__(self):
         return f'<User {self.id} {self.first_name} {self.last_name}>'
+
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
@@ -49,31 +50,53 @@ class Product(db.Model, SerializerMixin):
     industry = db.relationship('Industry', back_populates='product')
 
     # Serialization rules
-    serialize_rules = ('-pricing.product', '-production.product', '-industry.product',)
+    serialize_rules = ('-pricing', '-production', '-industry',)
 
     def __repr__(self):
         return f'<Product {self.id} {self.product_name}>'
 
-
+# Credit model
 class Credit(db.Model, SerializerMixin):
     __tablename__ = 'credits'
     
     id = db.Column(db.Integer, primary_key=True)
     date_borrowed = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
     amount_borrowed = db.Column(db.Float, nullable=False)
+    payment_status = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    production_id = db.Column(db.Integer, db.ForeignKey('production.id'), nullable=False)
 
     # Relationships
     user = db.relationship('User', back_populates='credits')
-    production = db.relationship('Production', back_populates='credits')
+    payment = db.relationship('Payment', back_populates='credits')
 
     # Serialization rules
-    serialize_rules = ('-user.credits', '-production.credits',)
+    serialize_rules = ('-user.credits', '-payment.credits',)
 
     def __repr__(self):
         return f'<Credit {self.id} {self.amount_borrowed}>'
 
+# Payment model
+class Payment(db.Model, SerializerMixin):
+    __tablename__ = 'payments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    payment_date = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
+    currency = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    credit_id = db.Column(db.Integer, db.ForeignKey('credits.id'), nullable=False)
+
+    # Relationships
+    user = db.relationship('User', back_populates='payments')
+    credits = db.relationship('Credit', back_populates='payment')
+    # credits = db.relationship('Credit', back_populates='payment', cascade='all, delete-orphan')
+
+    # Serialization rules
+    serialize_rules = ('-user.payments', '-credits.payment',)
+
+    def __repr__(self):
+        return f'<Payment {self.id} {self.amount}>'
 
 class Production(db.Model, SerializerMixin):
     __tablename__ = 'production'
@@ -88,14 +111,12 @@ class Production(db.Model, SerializerMixin):
 
     # Relationships
     user = db.relationship('User', back_populates='production')
-    credits = db.relationship('Credit', back_populates='production')
     product = db.relationship('Product', back_populates = 'production')
     industry = db.relationship('Industry', back_populates='production')
     pricing = db.relationship('Pricing', back_populates='production')
-
    
-    serialize_only = ('id', 'date', 'production_in_UOM', 'user_id.user.name', 'industry_id', 'pricing_id', 'product_id')
-   
+    # serialize_only = ('id', 'date', 'production_in_UOM', 'user_id.user.name', 'industry_id', 'pricing_id', 'product_id')
+    serialize_rules = ('-user.production', '-product.production', '-industry.production', '-pricing.production','-pricing.industry',)
 
     def __repr__(self):
         return f'<Production {self.id} {self.production_in_UOM}>'
@@ -109,17 +130,20 @@ class Industry(db.Model, SerializerMixin):
     address = db.Column(db.String, nullable=False)
     collection_point = db.Column(db.String, nullable=False)
     contact_person = db.Column(db.String, nullable=False)
-    user_id = db.Column(db.Integer,db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
    
     # Relationships
-    user = db.relationship('User', back_populates='industry')
     product = db.relationship('Product', back_populates='industry')
     production = db.relationship('Production', back_populates='industry')
     pricing = db.relationship('Pricing', back_populates='industry')
 
+    #Association proxy relationship
+    user = association_proxy('production','user',
+                             creator=lambda user_obj: Production(user=user_obj)
+                             )
+
     # Serialization rules
-    serialize_rules = ('-user.industry', '-product.industry', '-production.industry', '-pricing.industry',)
+    serialize_rules = ('-product', '-production', '-pricing',)
 
     def __repr__(self):
         return f'<Industry {self.id} {self.industry_name}>'
@@ -128,8 +152,8 @@ class Pricing(db.Model, SerializerMixin):
     __tablename__ = 'pricing'
     
     id = db.Column(db.Integer, primary_key=True)
-    Unit_of_Measure = db.Column(db.String, nullable=False)
-    Unit_Price = db.Column(db.Float, nullable=False)
+    unit_of_measure = db.Column(db.String, nullable=False)
+    unit_price = db.Column(db.Float, nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
     industry_id = db.Column(db.Integer, db.ForeignKey('industries.id'), nullable=False)
 
@@ -139,7 +163,7 @@ class Pricing(db.Model, SerializerMixin):
     production = db.relationship('Production', back_populates='pricing')
 
     # Serialization rules
-    serialize_rules = ('-product.pricing', '-industry.pricing', '-production.pricing')
+    serialize_rules = ('-product', '-industry', '-production')
     def __repr__(self):
         return f'<Pricing {self.id} {self.Unit_Price}>'
     
@@ -184,6 +208,3 @@ def calculate_credit_limit(user_id):
     credit_limit = total_production * 10  # Example multiplier
 
     return credit_limit
-
-
-        

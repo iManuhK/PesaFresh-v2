@@ -8,7 +8,7 @@ from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required, get_jwt
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import db, User, Pricing, Product, Production, Credit, Transaction, Industry
+from models import db, User, Pricing, Product, Production, Credit, Transaction, Industry, Payment
 import os, uuid, logging, random
 from datetime import timedelta
 from dotenv import load_dotenv
@@ -221,31 +221,37 @@ class UsersByID(Resource):
             }
 
             return make_response(response_body, 404)
-        
-    def patch(self,id):
-         user = User.query.filter_by(id=id).first()
-         if user:
+    def patch(self, id):
+        user = User.query.filter_by(id=id).first()
+        if user:
             try:
-                for attr in request.json:
-                    setattr(user, attr, request.json.get(attr))
+                data = request.json
+                for attr in data:
+                    if attr == 'password':
+                        hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
+                        setattr(user, 'password', hashed_password)
+                    else:
+                        setattr(user, attr, data[attr])
 
                 db.session.add(user)
                 db.session.commit()
 
                 user_dict = user.to_dict()
                 return make_response(user_dict, 200)
-            
-            except ValueError:
-                response_body = {
-                    'error': 'error occured'
-                }
-         else:
-            response_body = {
-                'message' : 'User you are trying to Edit does not exist! Check the id again.'
-            }
 
+            except ValueError as e:
+                response_body = {
+                    'error': 'Error occurred',
+                    'message': str(e)
+                }
+                return make_response(response_body, 400)  # Return error response
+
+        else:
+            response_body = {
+                'message': 'User you are trying to edit does not exist! Check the ID again.'
+            }
             return make_response(response_body, 404)
-         
+        
 api.add_resource(UsersByID, '/users/<int:id>')
 
 class Products(Resource):
@@ -534,7 +540,7 @@ class MyTransactions(Resource):
             logging.warning(f"User {current_user} tried to access transactions but none were found.")
             return make_response(jsonify({"message": "Transaction not found"}), 404)
 
-api.add_resource(MyTransactions, '/my-transactions')
+api.add_resource(MyTransactions, '/dashboard/my-transactions')
 
 class MyProductions(Resource):
     @jwt_required()
@@ -550,7 +556,7 @@ class MyProductions(Resource):
             logging.warning(f"User {current_user} tried to access productions but none were found.")
             return make_response(jsonify({"message": "Productions not found"}), 404)
 
-api.add_resource(MyProductions, '/my-productions')
+api.add_resource(MyProductions, '/dashboard/my-productions')
 
 class Credits(Resource):
     def get(self):
@@ -640,6 +646,95 @@ class CreditsByID(Resource):
 
 api.add_resource(CreditsByID, '/credits/<int:id>')
 
+class Payments(Resource):
+    def get(self):
+        payments = [payment.to_dict() for payment in Payment.query.all()]
+        return make_response(jsonify(payments), 200)
+    
+    def post(self):
+        try:
+            data = request.json
+            new_payment = Payment(
+                user_id=data['user_id'],
+                credit_id=data['credit_id'],
+                amount=data['amount'],
+                currency=data['currency'],
+                payment_date=data['payment_date'],
+                description = data['description']
+            )
+
+            db.session.add(new_payment)
+            db.session.commit()
+
+            payment_dict = new_payment.to_dict()
+            response_body = {'success': 'Payment created successfully', 'payment': payment_dict}
+            return make_response(jsonify(response_body), 201)
+        
+        except KeyError:
+            response_body = {'error': 'Could not create payment. Required fields missing.'}
+            return make_response(jsonify(response_body), 400)
+        
+        except Exception as e:
+            response_body = {'error': str(e)}
+            return make_response(jsonify(response_body), 400)
+        
+api.add_resource(Payments, '/payments')
+
+class PaymentsByID(Resource):
+    def get(self, id):
+        payment = Payment.query.filter_by(id=id).first()
+        if payment:
+            payment_dict = payment.to_dict()
+            
+            return make_response(payment_dict, 200)
+         
+        else:
+            response_body = {
+                'message' : 'Payment does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+    
+    def patch(self, id):
+        payment = Payment.query.filter_by(id=id).first()
+        if payment:
+            try:
+                for attr in request.json:
+                    setattr(payment, attr, request.json.get(attr))
+
+                db.session.add(payment)
+                db.session.commit()
+
+                payment_dict = payment.to_dict()
+                return make_response(payment_dict, 200)
+            
+            except ValueError:
+                response_body = {
+                    'error': 'error occured'
+                }
+                return make_response(jsonify(response_body), 400)
+            except Exception as e:
+                response_body = {'error': str(e)}
+                return make_response(jsonify(response_body), 400)
+    
+    def delete(self, id):
+        payment = Payment.query.filter_by(id=id).first()
+        if payment:
+            db.session.delete(payment)
+            db.session.commit()
+
+            response_body = {
+               'message': 'Payment deleted Successfully'
+            }
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                'message' : 'Payment does not exist! Check the id again.'
+            }
+
+            return make_response(response_body, 404)
+
+api.add_resource(PaymentsByID, '/payments/<int:id>')
 
 class Pricing(Resource):
     def get(self):
