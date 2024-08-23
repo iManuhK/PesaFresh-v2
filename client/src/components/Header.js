@@ -31,9 +31,13 @@ export default function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   useEffect(() => {
-    // Ensure header updates on currentUser change
+    if (currentUser && currentUser.id) {
+      console.log(currentUser.id);
+    }
   }, [currentUser]);
+  
 
   const handleLogoutClick = async () => {
     await logoutUser();
@@ -42,9 +46,7 @@ export default function Header() {
 
   return (
     <header id='header'>
-      {
-      currentUser ? 
-      (
+      {currentUser && (
         <Box className="header-avatar">
           <Tooltip title="Account settings">
             <IconButton
@@ -54,14 +56,11 @@ export default function Header() {
               aria-haspopup="true"
               aria-expanded={open ? 'true' : undefined}
             >
-              <Avatar>M</Avatar>
+              <Avatar>{currentUser.name ? currentUser.name[0] : 'U'}</Avatar>
             </IconButton>
           </Tooltip>
         </Box>
-      ) 
-      : null
-      }
-
+      )}
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -97,14 +96,18 @@ export default function Header() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Profile {}
-        </MenuItem>
+        {currentUser && (
+          <Weblink to={`/update-profile/${currentUser.id}`}>
+            <MenuItem onClick={handleClose}>
+              <Avatar /> Profile
+            </MenuItem>
+          </Weblink>
+        )}
         <MenuItem onClick={handleClose}>
           <AccountBalanceIcon fontSize="small" /> My account
         </MenuItem>
         <Divider />
-        <Weblink to='/dashboard' >
+        <Weblink to='/dashboard'>
           <MenuItem onClick={handleClose}>
             <ListItemIcon>
               <ManageAccountsIcon fontSize="small" />
@@ -153,8 +156,7 @@ export default function Header() {
         <Weblink to="/about">About</Weblink>
       </div>
 
-      {
-      !currentUser && (
+      {!currentUser && (
         <>
           <Divider orientation="vertical" variant="middle" flexItem />
           <div className="menu-auth-buttons">

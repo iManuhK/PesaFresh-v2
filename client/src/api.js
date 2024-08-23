@@ -3,6 +3,7 @@ import axios from 'axios';
 const API_URL = 'http://127.0.0.1:5555';
 const getJwtToken = () => localStorage.getItem('jwt_Token');
 
+
 const registerUser = async (userData) => {
     try {
         const response = await axios.post(`${API_URL}/register`, userData);
@@ -47,3 +48,46 @@ export const logout = async () => {
     }
 };
 
+
+export const updateProfile = async (userData) => {
+    const { id, ...data } = userData;
+    try {
+        const response = await axios.patch(`${API_URL}/users/${id}`, data, {
+            headers: {
+                Authorization: `Bearer ${getJwtToken()}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error updating profile:', error.response?.data || error.message || error);
+        throw error;
+    }
+};
+
+export const getCurrentUser = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/current_user`, {
+            headers: {
+                Authorization: `Bearer ${getJwtToken()}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching current user:', error.response?.data || error.message || error);
+        throw error;
+    }
+};
+
+export const getMyCredits = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/dashboard/my-credits`, {
+            headers: {
+                Authorization: `Bearer ${getJwtToken()}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching my credits:', error.response?.data || error.message || error);
+        throw error;
+    }
+};

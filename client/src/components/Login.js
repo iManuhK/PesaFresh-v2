@@ -5,7 +5,8 @@ import { useAuth } from './ContextProvider/AuthContext';
 
 export default function Login() {
   const { loginUser } = useAuth();
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
+  const [national_id, setNatID] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
@@ -13,7 +14,7 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await loginUser({ email, password });
+      await loginUser({ national_id, password });
       navigate('/');
       alert("Login successful.!")
     } catch (error) {
@@ -36,7 +37,7 @@ export default function Login() {
               <h2 className="login-title">Welcome Back to <span>PesaFresh!</span></h2>
               <p className="login-description">Login to access your account and manage your transactions.</p>
               <form onSubmit={handleSubmit}>
-                <div className="form-group">
+                {/* <div className="form-group">
                   <div className="form-floating">
                     <input
                       type="email"
@@ -47,6 +48,19 @@ export default function Login() {
                       required
                     />
                     <label>Email</label>
+                  </div>
+                </div> */}
+                <div className="form-group">
+                  <div className="form-floating">
+                    <input
+                      type="number"
+                      value={national_id}
+                      onChange={(e) => setNatID(e.target.value)}
+                      className="form-control"
+                      placeholder="ID Number"
+                      required
+                    />
+                    <label>National ID</label>
                   </div>
                 </div>
                 <div className="form-group">

@@ -9,6 +9,7 @@ metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
 db = SQLAlchemy(metadata=metadata)
+
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
     
@@ -23,6 +24,7 @@ class User(db.Model, SerializerMixin):
     active = db.Column(db.Boolean, default=True)
     created_on = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
     updated_on = db.Column(db.DateTime, default=None, onupdate=db.func.now(), nullable=True)
+    national_id = db.Column(db.Integer, unique=True, nullable=False)
 
     # Relationships
     transactions = db.relationship('Transaction', back_populates='user', cascade='all, delete-orphan')
@@ -42,15 +44,15 @@ class Product(db.Model, SerializerMixin):
     
     id = db.Column(db.Integer, primary_key=True)
     product_name = db.Column(db.String, nullable=False)
+    unit_of_measure = db.Column(db.String, nullable=False)
     product_description = db.Column(db.String, nullable=True)
 
     # Relationships
-    pricing = db.relationship('Pricing', back_populates='product')
     production = db.relationship('Production', back_populates='product')
     industry = db.relationship('Industry', back_populates='product')
 
     # Serialization rules
-    serialize_rules = ('-pricing', '-production', '-industry',)
+    serialize_rules = ('-production', '-industry',)
 
     def __repr__(self):
         return f'<Product {self.id} {self.product_name}>'
@@ -61,6 +63,7 @@ class Credit(db.Model, SerializerMixin):
     
     id = db.Column(db.Integer, primary_key=True)
     date_borrowed = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
+    currency = db.Column(db.String, nullable=False)
     amount_borrowed = db.Column(db.Float, nullable=False)
     payment_status = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -106,17 +109,15 @@ class Production(db.Model, SerializerMixin):
     production_in_UOM = db.Column(db.Float, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
-    pricing_id = db.Column(db.Integer, db.ForeignKey('pricing.id'), nullable=False)
     industry_id = db.Column(db.Integer, db.ForeignKey('industries.id'), nullable=False)
 
     # Relationships
     user = db.relationship('User', back_populates='production')
     product = db.relationship('Product', back_populates = 'production')
     industry = db.relationship('Industry', back_populates='production')
-    pricing = db.relationship('Pricing', back_populates='production')
    
-    # serialize_only = ('id', 'date', 'production_in_UOM', 'user_id.user.name', 'industry_id', 'pricing_id', 'product_id')
-    serialize_rules = ('-user.production', '-product.production', '-industry.production', '-pricing.production','-pricing.industry',)
+    # serialize_only = ('id', 'date', 'production_in_UOM', 'user_id.user.name', 'industry_id', 'product_id')
+    serialize_rules = ('-user.production', '-product.production', '-industry.production', )
 
     def __repr__(self):
         return f'<Production {self.id} {self.production_in_UOM}>'
@@ -130,12 +131,12 @@ class Industry(db.Model, SerializerMixin):
     address = db.Column(db.String, nullable=False)
     collection_point = db.Column(db.String, nullable=False)
     contact_person = db.Column(db.String, nullable=False)
+    unit_price = db.Column(db.Float, nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
    
     # Relationships
     product = db.relationship('Product', back_populates='industry')
     production = db.relationship('Production', back_populates='industry')
-    pricing = db.relationship('Pricing', back_populates='industry')
 
     #Association proxy relationship
     user = association_proxy('production','user',
@@ -143,29 +144,10 @@ class Industry(db.Model, SerializerMixin):
                              )
 
     # Serialization rules
-    serialize_rules = ('-product', '-production', '-pricing',)
+    serialize_rules = ('-product', '-production',)
 
     def __repr__(self):
         return f'<Industry {self.id} {self.industry_name}>'
-
-class Pricing(db.Model, SerializerMixin):
-    __tablename__ = 'pricing'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    unit_of_measure = db.Column(db.String, nullable=False)
-    unit_price = db.Column(db.Float, nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
-    industry_id = db.Column(db.Integer, db.ForeignKey('industries.id'), nullable=False)
-
-    # Relationships
-    product = db.relationship('Product', back_populates='pricing')
-    industry = db.relationship('Industry', back_populates='pricing')
-    production = db.relationship('Production', back_populates='pricing')
-
-    # Serialization rules
-    serialize_rules = ('-product', '-industry', '-production')
-    def __repr__(self):
-        return f'<Pricing {self.id} {self.Unit_Price}>'
     
 class Transaction(db.Model, SerializerMixin):
     __tablename__ = 'transactions'

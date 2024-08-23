@@ -1,10 +1,27 @@
-import { createContext, useContext, useState } from 'react';
-import { login, logout } from '../../api';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { login, logout, getCurrentUser } from '../../api';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const validateToken = async () => {
+      const token = localStorage.getItem('jwtToken');
+      if (token) {
+        try {
+          const user = await getCurrentUser();
+          setCurrentUser(user);
+        } catch (error) {
+          console.error('Failed to fetch current user:', error);
+          localStorage.removeItem('jwtToken'); // Clear invalid token
+        }
+      }
+    };
+
+    validateToken();
+  }, []);
 
   const loginUser = async (userData) => {
     try {

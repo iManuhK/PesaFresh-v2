@@ -1039,7 +1039,7 @@
 }
 
 .user-identity h1 span {
-  color: #007BFF;
+  color: #2c6f28;
 }
 
 .credit-limit,
@@ -1050,7 +1050,7 @@
 .credit-limit h2,
 .loans h2 {
   font-size: 1.5em;
-  color: #007BFF;
+  
 }
 
 .credit-limit p,
@@ -1073,15 +1073,15 @@
 .controls button {
   padding: 10px 15px;
   margin-right: 10px;
-  background-color: #007BFF;
-  color: white;
+  background-color: #00104010;
+  color: #111;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .controls button:hover {
-  background-color: #0056b3;
+  background-color: #555;
 }
 
 table {
@@ -1091,8 +1091,8 @@ table {
 }
 
 table thead {
-  background-color: #007BFF;
-  color: white;
+  background-color: #E0E1E6;
+  color: #111;
 }
 
 table th,
@@ -1126,5 +1126,103 @@ table tbody tr:hover {
 }
 
 .create-data-buttons button:hover {
+  background-color: #218838;
+}
+
+/* Start of not found error 404 page styling */
+/* General Styles */
+.not-found-error {
+  text-align: center;
+  padding: 20px;
+  height: 80vh;
+}
+.not-found-error img{
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.error-message h1 {
+  font-size: 8rem;
+  margin: 0;
+  color: #ff6b6b;
+}
+
+.error-message h2 {
+  font-size: 2rem;
+  margin: 10px 0;
+  color: #333;
+}
+
+.error-message p {
+  font-size: 1.2rem;
+  margin: 10px 0 20px;
+  color: #777;
+}
+
+.not-found-error .home-button {
+  padding: 10px 20px;
+  background-color: #3b7d36;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #218838;
+}
+
+/* Update profile info styling */
+.update-profile {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.update-profile h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.update-profile form div {
+  margin-bottom: 15px;
+}
+
+.update-profile label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.update-profile input[type="text"],
+.update-profile input[type="number"],
+.update-profile input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.update-profile button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3b7d36;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.update-profile button:hover {
   background-color: #218838;
 }

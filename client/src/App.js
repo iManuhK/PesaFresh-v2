@@ -12,6 +12,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import UpdateProfile from './components/UpdateProfile';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/update-profile/:id" element={<UpdateProfile />} />
           <Route path="*" element={<NotFoundPage />} />
           </Routes>
         <Footer />

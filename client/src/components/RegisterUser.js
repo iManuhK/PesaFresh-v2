@@ -10,6 +10,7 @@ function Register() {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [first_name, setName] = useState("");
   const [username, setUserName] = useState("");
+  const [national_id, setIDNum] = useState("");
   const navigate = useNavigate();
 
 
@@ -21,6 +22,7 @@ function Register() {
     }
     const userData = {
         first_name,
+        national_id,
         username,
         email,
         password
@@ -62,6 +64,19 @@ function Register() {
                                 required
                                 />
                                 <label>Name</label>
+                            </div>
+                            </div>
+                            <div className="form-group">
+                            <div className="form-floating">
+                                <input
+                                type="number"
+                                value={national_id}
+                                onChange={(e) => setIDNum(e.target.value)}
+                                className="form-control"
+                                placeholder="national ID number"
+                                required
+                                />
+                                <label>ID Number</label>
                             </div>
                             </div>
                             <div className="form-group">
