@@ -8,7 +8,7 @@ from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required, get_jwt
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import db, User, Product, Production, Credit, Transaction, Industry, Payment
+from models import db, User, Product, Production, Credit, Transaction, Industry, Payment, calculate_credit_limit
 import os, uuid, logging, random
 from datetime import timedelta
 from dotenv import load_dotenv
@@ -567,7 +567,7 @@ class Credits(Resource):
     def get(self):
         credits = [credit.to_dict() for credit in Credit.query.all()]
         return make_response(jsonify(credits), 200)
-    
+
     def post(self):
         try:
             data = request.json
@@ -650,6 +650,17 @@ class CreditsByID(Resource):
             return make_response(response_body, 404)
 
 api.add_resource(CreditsByID, '/credits/<int:id>')
+
+
+class CreditLimit(Resource):
+    @jwt_required()
+    def get(self):
+        user_id = get_jwt_identity()
+        credit_limit = calculate_credit_limit(user_id)
+        return {'credit_limit': credit_limit}, 200
+
+api.add_resource(CreditLimit, '/credit_limit')
+
 
 class MyCredits(Resource):
     @jwt_required()

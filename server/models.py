@@ -70,7 +70,24 @@ class Credit(db.Model, SerializerMixin):
 
     # Relationships
     user = db.relationship('User', back_populates='credits')
-    payment = db.relationship('Payment', back_populates='credits')
+    payments = db.relationship('Payment', back_populates='credit')
+
+    def total_payments(self):
+        return sum(payment.amount for payment in self.payments)
+
+    def remaining_balance(self):
+        return self.amount_borrowed - self.total_payments()
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'date_borrowed': self.date_borrowed,
+            'currency': self.currency,
+            'amount_borrowed': float(self.amount_borrowed),
+            'payment_status': self.payment_status,
+            'total_payments': float(self.total_payments()),
+            'remaining_balance': float(self.remaining_balance()), 
+        }
 
     # Serialization rules
     serialize_rules = ('-user.credits', '-payment.credits',)
@@ -92,7 +109,7 @@ class Payment(db.Model, SerializerMixin):
 
     # Relationships
     user = db.relationship('User', back_populates='payments')
-    credits = db.relationship('Credit', back_populates='payment')
+    credit = db.relationship('Credit', back_populates='payments')
     # credits = db.relationship('Credit', back_populates='payment', cascade='all, delete-orphan')
 
     # Serialization rules
