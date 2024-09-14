@@ -16,7 +16,8 @@ load_dotenv()
 
 app = Flask(__name__)
 
-CORS(app)
+CORS(app, supports_credentials=True, origins="http://localhost:3000")
+
 
 UPLOAD_FOLDER = 'images/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -75,7 +76,12 @@ class Login(Resource):
             access_token = create_access_token(identity=user.id)
         
             response_body = {
-                'access_token' : f'{access_token}'
+                'access_token' : f'{access_token}',
+                'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    'role': user.role
+                }
                 }
             return make_response(response_body, 200)
         
