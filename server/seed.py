@@ -4,8 +4,11 @@ from faker import Faker
 from datetime import datetime
 from models import db, User, Product, Credit, Production, Industry, Transaction, Payment
 from app import app
+from flask_bcrypt import Bcrypt
+import random
 
 faker = Faker()
+bcrypt = Bcrypt()
 
 def delete_existing_data():
     try:
@@ -22,6 +25,11 @@ def delete_existing_data():
         db.session.rollback()
         print(f"An error occurred while deleting existing data: {e}")
 
+def generate_roles():
+    possible_roles = ['admin', 'user', 'root', 'enumerator']
+    # Faker can assign 1 to 3 random roles from the list
+    return random.sample(possible_roles, random.randint(1, 3))
+
 def seed_users(n):
     users = []
     for _ in range(n):
@@ -32,8 +40,8 @@ def seed_users(n):
             username=faker.unique.user_name(),
             email=faker.unique.email(),
             phone=faker.phone_number(),
-            password=faker.password(),
-            role='user',
+            password = bcrypt.generate_password_hash(faker.password()).decode('utf-8'),
+            roles=generate_roles(),
             active=True,
             created_on=faker.date_time_this_decade(),
             updated_on=faker.date_time_this_decade()

@@ -1,55 +1,257 @@
-2024-09-14 22:38:12,026 INFO: 127.0.0.1 - - [14/Sep/2024 22:38:12] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:05:18,581 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-09-14 23:05:18,710 INFO:  * Restarting with stat
-2024-09-14 23:05:19,291 WARNING:  * Debugger is active!
-2024-09-14 23:05:19,296 INFO:  * Debugger PIN: 617-080-234
-2024-09-14 23:05:31,401 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-09-14 23:05:31,436 INFO:  * Restarting with stat
-2024-09-14 23:05:31,797 WARNING:  * Debugger is active!
-2024-09-14 23:05:31,802 INFO:  * Debugger PIN: 617-080-234
-2024-09-14 23:05:32,815 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-09-14 23:05:32,869 INFO:  * Restarting with stat
-2024-09-14 23:05:33,187 WARNING:  * Debugger is active!
-2024-09-14 23:05:33,194 INFO:  * Debugger PIN: 617-080-234
-2024-09-14 23:05:41,198 INFO: 127.0.0.1 - - [14/Sep/2024 23:05:41] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:05:41,236 INFO: 127.0.0.1 - - [14/Sep/2024 23:05:41] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
-2024-09-14 23:15:21,333 INFO: 127.0.0.1 - - [14/Sep/2024 23:15:21] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:15:21,581 INFO: 127.0.0.1 - - [14/Sep/2024 23:15:21] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:17:22,233 INFO: 127.0.0.1 - - [14/Sep/2024 23:17:22] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:17:22,486 INFO: 127.0.0.1 - - [14/Sep/2024 23:17:22] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:18:43,336 INFO: 127.0.0.1 - - [14/Sep/2024 23:18:43] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:18:43,586 INFO: 127.0.0.1 - - [14/Sep/2024 23:18:43] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:18:59,423 INFO: 127.0.0.1 - - [14/Sep/2024 23:18:59] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:18:59,674 INFO: 127.0.0.1 - - [14/Sep/2024 23:18:59] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
-2024-09-14 23:19:13,540 INFO: 127.0.0.1 - - [14/Sep/2024 23:19:13] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:19:13,788 INFO: 127.0.0.1 - - [14/Sep/2024 23:19:13] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:23:14,729 INFO: 127.0.0.1 - - [14/Sep/2024 23:23:14] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:23:14,978 INFO: 127.0.0.1 - - [14/Sep/2024 23:23:14] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:24:31,807 INFO: 127.0.0.1 - - [14/Sep/2024 23:24:31] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:24:32,060 INFO: 127.0.0.1 - - [14/Sep/2024 23:24:32] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:25:00,836 INFO: 127.0.0.1 - - [14/Sep/2024 23:25:00] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:25:01,088 INFO: 127.0.0.1 - - [14/Sep/2024 23:25:01] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:26:15,159 INFO: 127.0.0.1 - - [14/Sep/2024 23:26:15] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:26:15,398 INFO: 127.0.0.1 - - [14/Sep/2024 23:26:15] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:27:40,704 INFO: 127.0.0.1 - - [14/Sep/2024 23:27:40] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:27:40,954 INFO: 127.0.0.1 - - [14/Sep/2024 23:27:40] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:37:44,420 INFO: 127.0.0.1 - - [14/Sep/2024 23:37:44] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:37:44,667 INFO: 127.0.0.1 - - [14/Sep/2024 23:37:44] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:39:57,200 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-09-14 23:39:57,267 INFO:  * Restarting with stat
-2024-09-14 23:39:57,657 WARNING:  * Debugger is active!
-2024-09-14 23:39:57,663 INFO:  * Debugger PIN: 617-080-234
-2024-09-14 23:39:59,682 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
-2024-09-14 23:39:59,735 INFO:  * Restarting with stat
-2024-09-14 23:41:32,836 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2024-09-15 00:37:12,226 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5555
-2024-09-14 23:41:32,836 INFO: [33mPress CTRL+C to quit[0m
-2024-09-14 23:41:32,836 INFO:  * Restarting with stat
-2024-09-14 23:41:33,055 WARNING:  * Debugger is active!
-2024-09-14 23:41:33,062 INFO:  * Debugger PIN: 617-080-234
-2024-09-14 23:41:39,540 INFO: 127.0.0.1 - - [14/Sep/2024 23:41:39] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:41:39,803 INFO: 127.0.0.1 - - [14/Sep/2024 23:41:39] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:42:45,659 INFO: 127.0.0.1 - - [14/Sep/2024 23:42:45] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:42:45,910 INFO: 127.0.0.1 - - [14/Sep/2024 23:42:45] "POST /login HTTP/1.1" 200 -
-2024-09-14 23:43:04,675 INFO: 127.0.0.1 - - [14/Sep/2024 23:43:04] "OPTIONS /login HTTP/1.1" 200 -
-2024-09-14 23:43:04,925 INFO: 127.0.0.1 - - [14/Sep/2024 23:43:04] "POST /login HTTP/1.1" 200 -
+2024-09-15 00:37:12,226 INFO: [33mPress CTRL+C to quit[0m
+2024-09-15 00:37:12,226 INFO:  * Restarting with stat
+2024-09-15 00:37:12,446 WARNING:  * Debugger is active!
+2024-09-15 00:37:12,455 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:39:05,407 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/seed.py', reloading
+2024-09-15 00:39:05,469 INFO:  * Restarting with stat
+2024-09-15 00:39:05,787 WARNING:  * Debugger is active!
+2024-09-15 00:39:05,792 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:39:09,837 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/seed.py', reloading
+2024-09-15 00:39:09,893 INFO:  * Restarting with stat
+2024-09-15 00:39:10,174 WARNING:  * Debugger is active!
+2024-09-15 00:39:10,178 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:39:11,193 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/seed.py', reloading
+2024-09-15 00:39:11,253 INFO:  * Restarting with stat
+2024-09-15 00:39:11,493 WARNING:  * Debugger is active!
+2024-09-15 00:39:11,497 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:39:47,571 INFO: 127.0.0.1 - - [15/Sep/2024 00:39:47] "OPTIONS /login HTTP/1.1" 200 -
+2024-09-15 00:39:47,611 INFO: 127.0.0.1 - - [15/Sep/2024 00:39:47] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2024-09-15 00:40:14,465 INFO: 127.0.0.1 - - [15/Sep/2024 00:40:14] "GET /users HTTP/1.1" 200 -
+2024-09-15 00:43:01,116 INFO: 127.0.0.1 - - [15/Sep/2024 00:43:01] "[31m[1mPOST /users HTTP/1.1[0m" 400 -
+2024-09-15 00:43:52,974 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 00:43:53,033 INFO:  * Restarting with stat
+2024-09-15 00:43:53,410 WARNING:  * Debugger is active!
+2024-09-15 00:43:53,416 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:43:58,456 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 00:43:58,519 INFO:  * Restarting with stat
+2024-09-15 00:44:14,527 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5555
+2024-09-15 00:44:14,527 INFO: [33mPress CTRL+C to quit[0m
+2024-09-15 00:44:14,527 INFO:  * Restarting with stat
+2024-09-15 00:44:14,752 WARNING:  * Debugger is active!
+2024-09-15 00:44:14,758 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:44:20,564 INFO: 127.0.0.1 - - [15/Sep/2024 00:44:20] "[31m[1mPOST /users HTTP/1.1[0m" 400 -
+2024-09-15 00:44:48,077 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 00:44:48,167 INFO:  * Restarting with stat
+2024-09-15 00:44:48,537 WARNING:  * Debugger is active!
+2024-09-15 00:44:48,543 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:44:52,435 INFO: 127.0.0.1 - - [15/Sep/2024 00:44:52] "[31m[1mPOST /users HTTP/1.1[0m" 400 -
+2024-09-15 00:45:39,967 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 00:45:40,006 INFO:  * Restarting with stat
+2024-09-15 00:45:40,369 WARNING:  * Debugger is active!
+2024-09-15 00:45:40,373 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:45:41,388 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 00:45:41,445 INFO:  * Restarting with stat
+2024-09-15 00:45:41,672 WARNING:  * Debugger is active!
+2024-09-15 00:45:41,676 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:45:44,697 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 00:45:44,746 INFO:  * Restarting with stat
+2024-09-15 00:46:19,417 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5555
+2024-09-15 00:46:19,417 INFO: [33mPress CTRL+C to quit[0m
+2024-09-15 00:46:19,417 INFO:  * Restarting with stat
+2024-09-15 00:46:19,638 WARNING:  * Debugger is active!
+2024-09-15 00:46:19,645 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:46:24,289 INFO: 127.0.0.1 - - [15/Sep/2024 00:46:24] "[35m[1mPOST /users HTTP/1.1[0m" 201 -
+2024-09-15 00:47:30,351 INFO: 127.0.0.1 - - [15/Sep/2024 00:47:30] "[31m[1mPATCH /users/8 HTTP/1.1[0m" 401 -
+2024-09-15 00:47:38,709 ERROR: Error: 'User' object has no attribute 'role'
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/emmanuel/Development/projects/PFapp/server/app.py", line 83, in post
+    'role': user.role
+AttributeError: 'User' object has no attribute 'role'
+2024-09-15 00:47:38,712 INFO: 127.0.0.1 - - [15/Sep/2024 00:47:38] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2024-09-15 00:48:01,965 INFO: 127.0.0.1 - - [15/Sep/2024 00:48:01] "GET /users HTTP/1.1" 200 -
+2024-09-15 00:48:43,564 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5555
+2024-09-15 00:48:43,564 INFO: [33mPress CTRL+C to quit[0m
+2024-09-15 00:48:43,564 INFO:  * Restarting with stat
+2024-09-15 00:48:43,784 WARNING:  * Debugger is active!
+2024-09-15 00:48:43,791 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:48:49,950 INFO: 127.0.0.1 - - [15/Sep/2024 00:48:49] "GET /users HTTP/1.1" 200 -
+2024-09-15 00:48:57,684 ERROR: Error: 'User' object has no attribute 'role'
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/emmanuel/Development/projects/PFapp/server/app.py", line 83, in post
+    'role': user.role
+AttributeError: 'User' object has no attribute 'role'
+2024-09-15 00:48:57,695 INFO: 127.0.0.1 - - [15/Sep/2024 00:48:57] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2024-09-15 00:50:04,519 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 00:50:04,577 INFO:  * Restarting with stat
+2024-09-15 00:50:04,891 WARNING:  * Debugger is active!
+2024-09-15 00:50:04,896 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:50:15,994 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 00:50:16,054 INFO:  * Restarting with stat
+2024-09-15 00:50:16,410 WARNING:  * Debugger is active!
+2024-09-15 00:50:16,415 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:50:37,476 INFO: 127.0.0.1 - - [15/Sep/2024 00:50:37] "POST /login HTTP/1.1" 200 -
+2024-09-15 00:51:14,758 INFO: 127.0.0.1 - - [15/Sep/2024 00:51:14] "[31m[1mPATCH /users/1 HTTP/1.1[0m" 401 -
+2024-09-15 00:51:24,718 ERROR: Error: 'User' object has no attribute 'role'
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_jwt_extended/view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+  File "/Users/emmanuel/Development/projects/PFapp/server/app.py", line 250, in patch
+    if current_user_id != id and current_user.role != 'admin':
+AttributeError: 'User' object has no attribute 'role'
+2024-09-15 00:51:24,720 INFO: 127.0.0.1 - - [15/Sep/2024 00:51:24] "[35m[1mPATCH /users/1 HTTP/1.1[0m" 500 -
+2024-09-15 00:52:41,447 ERROR: Error: 'User' object has no attribute 'role'
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_jwt_extended/view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+  File "/Users/emmanuel/Development/projects/PFapp/server/app.py", line 250, in patch
+    if current_user_id != id and current_user.role != 'admin':
+AttributeError: 'User' object has no attribute 'role'
+2024-09-15 00:52:41,449 INFO: 127.0.0.1 - - [15/Sep/2024 00:52:41] "[35m[1mPATCH /users/1 HTTP/1.1[0m" 500 -
+2024-09-15 00:53:05,813 ERROR: Error: 'User' object has no attribute 'role'
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_jwt_extended/view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+  File "/Users/emmanuel/Development/projects/PFapp/server/app.py", line 250, in patch
+    if current_user_id != id and current_user.role != 'admin':
+AttributeError: 'User' object has no attribute 'role'
+2024-09-15 00:53:05,814 INFO: 127.0.0.1 - - [15/Sep/2024 00:53:05] "[35m[1mPATCH /users/4 HTTP/1.1[0m" 500 -
+2024-09-15 00:53:14,681 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5555
+2024-09-15 00:53:14,681 INFO: [33mPress CTRL+C to quit[0m
+2024-09-15 00:53:14,682 INFO:  * Restarting with stat
+2024-09-15 00:53:14,907 WARNING:  * Debugger is active!
+2024-09-15 00:53:14,912 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:53:23,889 ERROR: Error: 'User' object has no attribute 'role'
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_jwt_extended/view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+  File "/Users/emmanuel/Development/projects/PFapp/server/app.py", line 250, in patch
+    if current_user_id != id and current_user.role != 'admin':
+AttributeError: 'User' object has no attribute 'role'
+2024-09-15 00:53:23,892 INFO: 127.0.0.1 - - [15/Sep/2024 00:53:23] "[35m[1mPATCH /users/4 HTTP/1.1[0m" 500 -
+2024-09-15 00:55:11,206 INFO: 127.0.0.1 - - [15/Sep/2024 00:55:11] "GET /users HTTP/1.1" 200 -
+2024-09-15 00:55:30,132 INFO: 127.0.0.1 - - [15/Sep/2024 00:55:30] "OPTIONS /login HTTP/1.1" 200 -
+2024-09-15 00:55:30,365 INFO: 127.0.0.1 - - [15/Sep/2024 00:55:30] "POST /login HTTP/1.1" 200 -
+2024-09-15 00:57:10,913 INFO: 127.0.0.1 - - [15/Sep/2024 00:57:10] "POST /login HTTP/1.1" 200 -
+2024-09-15 00:57:28,431 ERROR: Error: 'User' object has no attribute 'role'
+Traceback (most recent call last):
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask/views.py", line 110, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_restful/__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/emmanuel/.pyenv/versions/3.8.13/lib/python3.8/site-packages/flask_jwt_extended/view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+  File "/Users/emmanuel/Development/projects/PFapp/server/app.py", line 250, in patch
+    if current_user_id != id and current_user.role != 'admin':
+AttributeError: 'User' object has no attribute 'role'
+2024-09-15 00:57:28,432 INFO: 127.0.0.1 - - [15/Sep/2024 00:57:28] "[35m[1mPATCH /users/1 HTTP/1.1[0m" 500 -
+2024-09-15 00:58:46,816 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 00:58:46,873 INFO:  * Restarting with stat
+2024-09-15 00:58:47,217 WARNING:  * Debugger is active!
+2024-09-15 00:58:47,222 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:58:55,302 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 00:58:55,365 INFO:  * Restarting with stat
+2024-09-15 00:58:55,683 WARNING:  * Debugger is active!
+2024-09-15 00:58:55,687 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 00:59:18,887 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 00:59:18,927 INFO:  * Restarting with stat
+2024-09-15 01:00:28,108 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5555
+2024-09-15 01:00:28,108 INFO: [33mPress CTRL+C to quit[0m
+2024-09-15 01:00:28,109 INFO:  * Restarting with stat
+2024-09-15 01:00:28,335 WARNING:  * Debugger is active!
+2024-09-15 01:00:28,342 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 01:00:35,330 INFO: 127.0.0.1 - - [15/Sep/2024 01:00:35] "POST /login HTTP/1.1" 200 -
+2024-09-15 01:00:52,134 INFO: 127.0.0.1 - - [15/Sep/2024 01:00:52] "[31m[1mPATCH /users/1 HTTP/1.1[0m" 403 -
+2024-09-15 01:01:53,069 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 01:01:53,124 INFO:  * Restarting with stat
+2024-09-15 01:02:27,794 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5555
+2024-09-15 01:02:27,794 INFO: [33mPress CTRL+C to quit[0m
+2024-09-15 01:02:27,795 INFO:  * Restarting with stat
+2024-09-15 01:02:28,037 WARNING:  * Debugger is active!
+2024-09-15 01:02:28,043 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 01:02:32,268 INFO: 127.0.0.1 - - [15/Sep/2024 01:02:32] "PATCH /users/1 HTTP/1.1" 200 -
+2024-09-15 01:02:48,519 INFO: 127.0.0.1 - - [15/Sep/2024 01:02:48] "PATCH /users/4 HTTP/1.1" 200 -
+2024-09-15 01:02:54,187 INFO: 127.0.0.1 - - [15/Sep/2024 01:02:54] "[31m[1mPATCH /users/8 HTTP/1.1[0m" 401 -
+2024-09-15 01:03:30,003 INFO: 127.0.0.1 - - [15/Sep/2024 01:03:30] "PATCH /users/8 HTTP/1.1" 200 -
+2024-09-15 01:04:23,192 INFO: 127.0.0.1 - - [15/Sep/2024 01:04:23] "OPTIONS /login HTTP/1.1" 200 -
+2024-09-15 01:04:23,442 INFO: 127.0.0.1 - - [15/Sep/2024 01:04:23] "POST /login HTTP/1.1" 200 -
+2024-09-15 01:04:34,580 INFO: 127.0.0.1 - - [15/Sep/2024 01:04:34] "OPTIONS /login HTTP/1.1" 200 -
+2024-09-15 01:04:34,830 INFO: 127.0.0.1 - - [15/Sep/2024 01:04:34] "POST /login HTTP/1.1" 200 -
+2024-09-15 01:07:44,742 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 01:07:44,795 INFO:  * Restarting with stat
+2024-09-15 01:07:45,201 WARNING:  * Debugger is active!
+2024-09-15 01:07:45,206 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 01:07:49,244 INFO:  * Detected change in '/Users/emmanuel/Development/projects/PFapp/server/app.py', reloading
+2024-09-15 01:07:49,293 INFO:  * Restarting with stat
+2024-09-15 01:07:49,607 WARNING:  * Debugger is active!
+2024-09-15 01:07:49,612 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 01:07:57,206 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5555
+2024-09-15 01:07:57,206 INFO: [33mPress CTRL+C to quit[0m
+2024-09-15 01:07:57,206 INFO:  * Restarting with stat
+2024-09-15 01:07:57,439 WARNING:  * Debugger is active!
+2024-09-15 01:07:57,444 INFO:  * Debugger PIN: 617-080-234
+2024-09-15 01:08:06,000 INFO: 127.0.0.1 - - [15/Sep/2024 01:08:06] "GET /users HTTP/1.1" 200 -

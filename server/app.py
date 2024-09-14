@@ -80,8 +80,8 @@ class Login(Resource):
                 'user': {
                     'id': user.id,
                     'username': user.username,
-                    'role': user.role
-                }
+                    'roles': user.roles
+                    }
                 }
             return make_response(response_body, 200)
         
@@ -135,7 +135,7 @@ class Register(Resource):
         new_user = User(
             first_name=request.json.get('first_name', ''),
             last_name=request.json.get('last_name', ''),
-            role=request.json.get('role', 'user'),
+            roles=request.json.get('roles', ['user']),
             username=request.json.get('username', ''),
             email=email,
             national_id=national_id,
@@ -157,7 +157,7 @@ class Current_User(Resource):
     @jwt_required()
     def get(self):
         current_user_id = get_jwt_identity()
-        current_user = User.query.get(current_user_id)
+        current_user = User.session.get(current_user_id)
         if current_user:
             current_user_dict = current_user.to_dict()
             return make_response(current_user_dict, 200)
@@ -180,7 +180,7 @@ class Users(Resource):
             new_user = User(
                 first_name=data['first_name'],
                 last_name=data.get('last_name', ''),
-                role=data.get('role', 'user'),
+                roles=data.get('roles', ['user']),
                 username=data['username'],
                 email=data['email'],
                 national_id=data['national_id'],
@@ -240,18 +240,18 @@ class UsersByID(Resource):
     @jwt_required()
     def patch(self, id):
         current_user_id = get_jwt_identity()
-        current_user = User.query.get(current_user_id)  # Fetch the current user based on JWT
+        current_user = User.session.get(current_user_id)  # Fetch the current user based on JWT
 
         user = User.query.filter_by(id=id).first()
 
         if not user:
             return make_response({'message': 'User not found'}, 404)
 
-        if current_user_id != id and current_user.role != 'admin':
+        if current_user_id != id and 'admin' not in current_user.roles and 'root' not in current_user.roles:
             return make_response({'message': 'Unauthorized'}, 403)
 
         data = request.json
-        for attr in ['first_name', 'last_name', 'role', 'username', 'email', 'national_id', 'active']:
+        for attr in ['first_name', 'last_name', 'roles', 'username', 'email', 'national_id', 'active']:
             if attr in data:
                 setattr(user, attr, data[attr])
 
@@ -870,7 +870,7 @@ def add_production(self,user_id, production_data):
 
     # Recalculate and update credit limit
     credit_limit = self.calculate_credit_limit(user_id)
-    user = User.query.get(user_id)
+    user = User.session.get(user_id)
     user.credit_limit = credit_limit
     db.session.commit()
 

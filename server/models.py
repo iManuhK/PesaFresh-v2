@@ -20,7 +20,7 @@ class User(db.Model, SerializerMixin):
     email = db.Column(db.String(64), unique=True, nullable=False)
     phone = db.Column(db.String, default="", nullable=False)
     password = db.Column(db.String(128), nullable=False)
-    role = db.Column(db.String(30), nullable=True, default="user")
+    roles = db.Column(db.JSON, nullable=True, default=lambda: ["user"])
     active = db.Column(db.Boolean, default=True)
     created_on = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
     updated_on = db.Column(db.DateTime, default=None, onupdate=db.func.now(), nullable=True)

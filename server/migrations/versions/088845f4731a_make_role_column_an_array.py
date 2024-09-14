@@ -1,8 +1,8 @@
-"""initial migration
+"""make role column an array
 
-Revision ID: 3bfba24743ca
+Revision ID: 088845f4731a
 Revises: 
-Create Date: 2024-08-24 00:46:46.609616
+Create Date: 2024-09-15 00:16:17.382579
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3bfba24743ca'
+revision = '088845f4731a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,7 +33,7 @@ def upgrade():
     sa.Column('email', sa.String(length=64), nullable=False),
     sa.Column('phone', sa.String(), nullable=False),
     sa.Column('password', sa.String(length=128), nullable=False),
-    sa.Column('role', sa.String(length=30), nullable=True),
+    sa.Column('roles', sa.JSON(), nullable=True),
     sa.Column('active', sa.Boolean(), nullable=True),
     sa.Column('created_on', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
     sa.Column('updated_on', sa.DateTime(), nullable=True),
